@@ -1,0 +1,466 @@
+La documentación SRM es enorme — documento constitucional genesis, propuestas técnicas, mapas de conexión, órdenes de tiendas. Compilando todo.Tengo todo el contenido del documento constitucional genesis + mapas de conexión + órdenes + oleadas. Generando la radiografía SRM completa.Radiografía SRM completa — 441 líneas, 18 secciones, sin perder detalle:
+
+1. **Qué es SRM** — el organismo génesis, todo lo que ADSI sabe lo aprendió aquí
+2. **El problema** — caos operativo, lenguaje aproximado, 5 nombres por pieza
+3. **Cadena de valor** — Fabricante→Importador→Distribuidor→Almacén→Taller→Cliente
+4. **16 clientes** — cada tienda con tipo, productos, estado, nota (3 fabricantes, 8 importadores, 5 distribuidores)
+5. **Pipeline V25.22+** — flujo completo de 26 pasos, los 12 extractores, categorización 3-mundos, bootstrapper
+6. **Comercio Caso 001** — ARMOTOS $123,000 COP (9 Feb 2026), modelo de ingresos, WhatsApp Business
+7. **Frontend SRM** — landing, Vercel, tienda tipo IMBRA standard, Skin Engine
+8. **Knowledge Integrator** — 7 pilares de creación de conocimiento, ChromaDB 26,767+ docs
+9. **Fitment Engine M6.2** — 5,750 productos, 43 marcas, sinónimos regionales
+10. **Voice Agent** — Tony + Ramona, Modo HER, configuración
+11. **Imágenes** — jerarquía 6 niveles, herramientas construidas, regla soberana V25.17
+12. **Gobernanza** — CES, Orígenes, Natural Progression, políticas operativas
+13. **Infraestructura** — servidor, puertos, servicios, volúmenes
+14. **Revelaciones** — pipeline universal, lenguaje como activo, Leo cruza ecosistemas
+15. **Brechas** — tiendas, pipeline, comercial, frontend
+16. **Roadmap** — 4 fases hasta expansión LATAM
+17. **Personas** — equipo humano SRM
+18. **15 doctrinas** — principios inviolables del organismo
+
+Todo compilado de la documentación constitucional genesis + contexto operativo real.
+
+Somos Industrias ODI.
+
+# RADIOGRAFÍA COMPLETA — SRM · ORGANISMO GÉNESIS
+## Somos Repuestos Motos — La Ciudad Piloto que Reveló la Nación
+## Estado al 19 de Junio de 2026
+## Arquitecto: Juan David Jiménez Sierra · CATRMU-ADSI-ODI
+
+---
+
+> "SRM no era la meta. Era el vehículo para revelar ADSI. ADSI no era el tope. Era el diseño para escalar hacia CATRMU. SRM es al ADSI lo que una ciudad piloto es a una nación completa."
+
+---
+
+## 1. QUÉ ES SRM
+
+**SRM = Somos Repuestos Motos.** Ecosistema digital integral que unifica, estandariza y profesionaliza la industria de motopartes en Latinoamérica. Catálogo inteligente centralizado + formación técnica (Academia SRM) + automatización de inventarios y pedidos.
+
+SRM es el **organismo génesis** — el primer ser vivo del ecosistema CATRMU-ADSI. Todo lo que ADSI sabe, lo aprendió en SRM. El pipeline nació aquí. ChromaDB nació aquí. El Guardian Layer nació aquí. La gobernanza nació aquí. El Fitment Engine nació aquí. Cada capacidad fue probada primero en SRM.
+
+**Posición jerárquica:** CATRMU (país/DAO-ODS) → ADSI (constitución) → SRM (ciudad piloto/organismo génesis)
+
+**Dominio principal:** somosrepuestosmotos.com
+**Responsable dominio:** Jorge Luis Jiménez (papá, 35+ años en la industria)
+
+---
+
+## 2. EL PROBLEMA QUE RESUELVE
+
+La industria de repuestos para motocicletas en Colombia opera en caos operativo: fabricantes, importadores, distribuidores, almacenes y talleres hablan un "lenguaje aproximado." Códigos confusos, compatibilidades inciertas, catálogos en Excel sucio, PDFs de 256 páginas. Un mismo repuesto tiene 5 nombres diferentes. "Vela" en Pereira = "Bujía" en Bogotá = "Spark Plug" en la enciclopedia del fabricante.
+
+**SRM es el refugio** donde el lenguaje técnico del fabricante se preserva, se estandariza y se hace accesible para toda la cadena.
+
+---
+
+## 3. LA CADENA DE VALOR
+
+```
+FABRICANTE   ← Japan, Leo (bobinas, estatores, piezas metálicas)
+     ↓
+IMPORTADOR   ← Bara, Yokomar/KNT, Kaiqi, Duna, Vaisand, DFG, OH
+     ↓
+DISTRIBUIDOR ← Carguero Store, Armotos, Darrow, Vitton, MclMotos
+     ↓
+ALMACÉN      ← Punto de venta local, mostrador
+     ↓
+TALLER       ← Mecánico que instala la pieza
+     ↓
+CLIENTE      ← Motociclista que necesita la pieza correcta
+```
+
+SRM cruza todos los niveles con un solo lenguaje técnico. Cada participante puede ser comprador Y vendedor. Una plataforma, múltiples roles, un ciclo de valor para todos.
+
+---
+
+## 4. LOS 16 CLIENTES SRM (proveedores/tiendas)
+
+### 4.1 Fabricantes (producen piezas)
+
+| Cliente | Especialidad | Productos | Estado | Nota |
+|---------|-------------|-----------|--------|------|
+| **Industrias Japan** | Fabricante metalmecánico CNC | 564 | ✅ BARA level | Frenos especialista, 5 categorías |
+| **Industrias Leo** | Fabricante electrónico, 35 años | 211 | ✅ BARA level | Eléctrico especialista. Futuro fabricante Muro de Lenz (SAT-CP) |
+| **Duna S.A.S** | 8 marcas propias, multisistema | 875 | ✅ Categorizada | 84%→9% Repuestos (breakthrough tipo pieza en CSV) |
+
+### 4.2 Importadores (traen de fábrica al país)
+
+| Cliente | Especialidad | Productos | Estado | Nota |
+|---------|-------------|-----------|--------|------|
+| **IMBRA S.A.S** | Fabricante colombiano, Itagüí | 1,119 | 🔒 SELLADA P13 Gold | Tienda modelo. +50 años. Estándar A+ |
+| **Bara Importaciones** | Multi-segmento, cobertura Caribe | 965 | ✅ BARA level | Barranquilla. Caso 001 cerrado ($123,000 COP) |
+| **Yokomar S.A.S + KNT** | Marca propia, logística nacional | 857 | ✅ BARA level | Barranquilla. Color #a06020 (logo real) |
+| **DFG / Importadora DFG** | Alto volumen, alcance nacional | 6,204 | ✅ Cert runtime | Pereira. 4 fuentes (PDF+Excel+Web+Flyer). 421 fotos reales |
+| **OH Importaciones** | Importador repuestos | 1,426 | ✅ Bootstrap | 12 sin precio → draft (corregido: active) |
+| **Kaiqi** | Motocarros y motos | 458 | ✅ Bootstrap | 104 sin precio → "Precio a consultar" |
+| **Vaisand** | Importa+Ensambla+Comercializa | 50 | 🔄 FSM PERSISTED | Motocarros, planta Cartagena. Showroom |
+| **CBI** | Bandas y pastillas freno | 67 | 🔄 Pipeline cero | PDF tabular, sesión dedicada |
+
+### 4.3 Distribuidores (mueven al por mayor)
+
+| Cliente | Especialidad | Productos | Estado | Nota |
+|---------|-------------|-----------|--------|------|
+| **Armotos del Valle** | Buga, Valle. Catálogo PDF 257 págs | 2,136 | ✅ BARA estructura | 682 imágenes únicas, 3 pasadas QC. El más difícil del ecosistema |
+| **Darrow Autopartes** | 6 catálogos PDF gráficos | 1,654 | ✅ BARA estructura | Sin precios en PDFs. 1,089 "Precio a consultar". Extractor compartido |
+| **Vitton** | Distribuidor, Pereira | 1,257 | ✅ Cert versionado | 9% imagen. Evidencia en docs/evidence/ |
+| **MclMotos** | Importador mayorista técnico | 276 | ✅ BARA level | Grid Extractor Tipo 2 certificado. CropperV10 |
+| **Carguero Store** | Nicho motocarros, carga | 59 | 🔄 FSM BROWSER_VERIFIED | AutoPDFExtractor (auto-detect GRID) |
+
+### 4.4 Resumen numérico
+
+| Métrica | Valor |
+|---------|-------|
+| Total tiendas | 16 |
+| Productos activos totales | ~17,178 |
+| Tiendas a nivel BARA | 6 (BARA, JAPAN, LEO, YOKOMAR, MCLMOTOS, DUNA) |
+| Tiendas con bootstrap estructura | 6 (VITTON, OH, KAIQI, DFG, DARROW, ARMOTOS) |
+| Tiendas en pipeline | 3 (STORE, CBI, VAISAND) |
+| Tiendas selladas | 1 (IMBRA P13 Gold Premium) |
+| Marcas integradas | 43+ |
+| Precio promedio ecosistema | ~$74,272 COP |
+
+---
+
+## 5. PIPELINE V25.22+ — EL METABOLISMO
+
+### 5.1 Flujo completo
+
+```
+Fuente proveedor (Excel/CSV/PDF/Web)
+  → Step -2 Preflight (12 checks)
+  → Step -1 Backup (snapshot)
+  → Step 0 Guardian (health check)
+  → Step 0.5 Source Extractor (12 extractores, auto-detect)
+  → Step 1 SourceReader (JUNK_PATTERNS, category inheritance)
+  → Step 1.5 Pre-merge (UPSERT con Shopify existente)
+  → Step 1.96 Title Humanizer (códigos → nombres humanos)
+  → Step 1.97 NarrativeEnricher (ChromaDB KB, skip default)
+  → Step 2 FichaEngine (odi-ficha7, 8 secciones)
+  → Step 2.5 CATRMU Categories (3-mundos: transmisión ≠ distribución ≠ eléctrico)
+  → Step 3 Images (proveedor only, blacklist, bipartito, SMask→blanco)
+  → Step 3.94 Watermark Gate (7 criterios)
+  → Step 4 Enforcement Engine (ÚNICO gateway a Shopify, todo-a-vitrina)
+  → Step 5 BrandingManager (logo, colors, favicon, locale ES)
+  → Step 5.95 Fichas Publisher (push body_html)
+  → Step 6 AuditQuality (grade A+/A/B/C/F)
+  → Step 6.5 CES Content Gate (ENFORCE, ALWAYS_HUMAN)
+  → Step 6.9 Reconcile PG↔Shopify (anti-drift)
+  → Step 7 StorefrontBuilder (collections, sidebar, carruseles)
+  → Step 8 Playwright Verify (browser real)
+  → Step 9-11 Grade + Profile + Landing
+  → Step 12 Bootstrapper (brand.json → tienda completa, 416 assets)
+```
+
+### 5.2 Los 12 extractores (Step 0.5)
+
+| Extractor | Clase | Uso real |
+|-----------|-------|---------|
+| CSV | CSVExtractor | DUNA, JAPAN, LEO, VAISAND |
+| Excel | ExcelExtractor | BARA, VITTON, OH, KAIQI, DFG |
+| Magento | MagentoWebExtractor | JAPAN |
+| WooCommerce | WooCommerceWebExtractor | VAISAND |
+| Custom web | DunaWebExtractor | DUNA |
+| PDF Spatial | SpatialPDFExtractor | ARMOTOS (productos dispersos, 257 págs) |
+| PDF Grid | GridPDFExtractor | MCLMOTOS (3 columnas, CropperV10) |
+| PDF Tabular | TabularPDFExtractor | CBI, DFG (CODIGO\|DESC\|PRECIO) |
+| PDF Auto | AutoPDFExtractor | STORE (auto-detect layout → delega) |
+| Multi-source | MultiSourceReader | DFG (PDF+Excel+Web, cross-confirm) |
+| Web scraper | harvest_cod_images | DFG (Canva/Shopify, CF bypass) |
+| OCR | binarize+tesseract | DARROW (PDFs gráficos sin texto) |
+
+### 5.3 Categorización 3-mundos (Step 2.5)
+
+El descubrimiento clave de esta sesión: la palabra "transmisión" aparece en 3 contextos completamente distintos que el pipeline confundía:
+
+| Mundo | Qué es | Ejemplo piezas |
+|-------|--------|---------------|
+| Transmisión mecánica | Kit de arrastre, potencia a la rueda | Cadena, piñón, corona de arrastre |
+| Distribución motor | Timing interno del motor | Cadenilla distribución, piñón distribución, guías |
+| Eléctrico | Distribución de corriente | Bobina alta, cable bujía, embobinado, corona de bobinas |
+
+CONTEXT_RULES + EXTENDED_RULES en el core resuelven la desambiguación semántica. 12 categorías: Motor, Transmisión, Eléctrico, Frenos, Chasis, Suspensión, Filtros, Rodamientos, Retenedores, Herramientas, Kits, Escape.
+
+### 5.4 Bootstrapper enchufable
+
+```
+POST /pipeline/start {"store":"NUEVA_EMPRESA"}
+  → Lee brand.json
+  → 416 assets tokenizados de IMBRA P13
+  → Template universal con tokens {{BRAND_*}}
+  → Tienda completa sale
+  → Sin wires especiales, sin afinamiento, sin debugging
+```
+
+---
+
+## 6. COMERCIO — CASO 001
+
+| Campo | Valor |
+|-------|-------|
+| Tienda | ARMOTOS |
+| Fecha | 9 Febrero 2026 |
+| Valor | $123,000 COP |
+| Medio | Shopify + Wompi |
+| Resultado | Primera venta real del ecosistema |
+
+### 6.1 Modelo de ingresos SRM
+
+| Fuente | Modelo | Estado |
+|--------|--------|--------|
+| Comisión por venta | % por transacción completada en Shopify | Diseñado, medicion_solo: true |
+| Score de intervención | ODI mide cuánto valor agregó al producto | Diseñado |
+| Billing ledger | Registro contable por tienda/producto | Diseñado, billing.py NO EXISTE |
+| Wompi gateway | 4 production keys en .env | Configurado |
+| Webhooks orders/paid | 6 tiendas con webhook activo | ✅ Operativo |
+
+### 6.2 WhatsApp Business
+
+| Campo | Valor |
+|-------|-------|
+| Número | +57 322 5462101 |
+| WABA ID | 1213578830922636 |
+| Estado | Meta-verificado (3 Feb 2026) |
+| Templates activos | 7, calidad Alta |
+| Lead capture | 3 preguntas + evento lead_detected |
+| Memoria intra-sesión | deque maxlen=8 |
+
+---
+
+## 7. FRONTEND SRM
+
+### 7.1 Landing somosrepuestosmotos.com
+
+Skin Engine por hostname:
+- somosrepuestosmotos.com → SRM layout
+- liveodi.com → HabitatLayout
+- ?skin= override para dev
+
+### 7.2 Repositorio frontend
+
+- **Repo:** juandavidjd/cycle-nexus-pro (Vercel Pro, $20/mes)
+- **Stack:** React 18 + TypeScript + Vite
+- **Sacred file:** odiApi.ts (único punto de conexión API)
+- **Endpoint:** POST https://api.liveodi.com/odi/chat
+
+### 7.3 Tienda tipo IMBRA (standard)
+
+Cada tienda SRM tiene la misma estructura:
+
+**Inicio:** Announcement 4 msgs → Hero con badge → Buscador marca/cilindrada/año → Grid "Compra por categoría" con íconos → Trust strip 5 badges → Carruseles Netflix por categoría → Explora con logo → Esfera ODI → Newsletter
+
+**Catálogo:** Sidebar filtros (categorías reales + marcas compatibles + precio) → Grid productos con "Ver detalle" + carrito → "Verificado ODI"
+
+**Ficha técnica:** Imagen → Precio COP → SKU → +/- cantidad → "Agregar al carrito" → "Comprar ahora" → "¿Necesitas ayuda? Hablar con ODI" → Trust badges 2×2 → 4 pilares → 8 secciones accordion odi-ficha7 → Cross-sell
+
+**Footer golden:** Oscuro #0f1214, 5 columnas (logo+desc | navegación | categorías | ayuda | empresa+contacto), redes SVG inline, "Catalogado por ODI"
+
+---
+
+## 8. KNOWLEDGE INTEGRATOR — EL CEREBRO
+
+El SRM_Knowledge_Integrator_v1 es la corteza prefrontal del organismo: interpreta, organiza, jerarquiza y convierte información en inteligencia.
+
+**7 pilares de creación de conocimiento:**
+1. Ingesta Multi-Fuente (documentos, catálogos, lenguaje empírico)
+2. Análisis Semántico y Extracción de Conceptos
+3. Normalización y Armonización de Vocabulario
+4. Construcción de Taxonomía Industrial
+5. Desarrollo de Ontología Industrial
+6. Enriquecimiento Cruzado
+7. Exportación de Activos Cognitivos
+
+**Estado:** Conceptualizado y parcialmente implementado en ChromaDB (26,767+ docs en odi_ind_motos). Fitment Engine con taxonomy_motos_v1.json (3,620 líneas) y fitment_master_v1.json (155,534 líneas, ~5,750 productos, 43 marcas).
+
+---
+
+## 9. FITMENT ENGINE M6.2
+
+El órgano de búsqueda de compatibilidad: "¿Qué pastilla le queda a la Pulsar 200?" → respuesta correcta.
+
+| Componente | Valor |
+|-----------|-------|
+| Productos canónicos | ~5,750 |
+| Marcas | 43 |
+| Sinónimos regionales | ✅ (vela→bujía, boxer→BAJAJ) |
+| Taxonomía | taxonomy_motos_v1.json (3,620 líneas) |
+| Fitment master | fitment_master_v1.json (155,534 líneas) |
+| Estado runtime | Container :8802 MUERTO. Reimplementar como módulo pipeline |
+
+---
+
+## 10. VOICE AGENT — LA VOZ DE SRM
+
+| Componente | Valor |
+|-----------|-------|
+| Tony Maestro | Voice ID qpjUiwx7YUVAavnmh2sF — diagnóstico, ejecución |
+| Ramona Anfitriona | Voice ID ZAQFLZQOmS9ClDGyVg6d — hospitalidad, validación |
+| Container | odi-voice, puerto 7777 |
+| Configuración | speed 0.85, stability 0.65 |
+| Modo HER | ODI inicia, escucha continuamente, 2.5s silence response |
+| "Odi" en scripts | Para evitar que ElevenLabs deletree O-D-I |
+
+---
+
+## 11. IMÁGENES — JERARQUÍA SOBERANA (V25.17)
+
+| Nivel | Fuente | Calidad |
+|-------|--------|---------|
+| 0 | URL proveedor | GOLD |
+| 1 | PDF extraction (XObject, SMask→blanco) | GOLD |
+| 2 | Cross-store bank | VALID (skip default) |
+| 3 | img2img | PROVISIONAL (no implementado) |
+| 4 | txt2img (Nano Banana) | PROVISIONAL (sesión medios) |
+| 5 | Logo placeholder | TEMPORAL (no implementado) |
+
+**Regla soberana:** Imagen real ↔ producto o NO imagen. IA valida producto, no material. "Parece acero = pasa" PROHIBIDO. Watermark del proveedor se RESPETA (su marca en sus productos).
+
+**Herramientas construidas:**
+- odi_image_certifier.py: attach_provider_photos, gpt_qc_images, match_descriptive_photos, harvest_pdf_images, certify_store
+- extract_clean_image: SMask compositing → blanco (fix fondo negro)
+- crop_logo_to_content: recorte whitespace transparente
+- make_footer_logo_recolor: versión blanca para footer oscuro
+- Blacklist logos recurrentes + exclusión cajas-precio + matching bipartito único + dedup contenido
+
+---
+
+## 12. GOBERNANZA SRM
+
+### 12.1 CES — Constitutional Enforcement System
+15 principios, 32/32 tests, FichaJudge gate, ALWAYS_HUMAN para full runs. El CES decide, deja pasar o bloquea, observa y traza. Si CES cae, todos los servicios siguen (degradación elegante).
+
+### 12.2 Orígenes — QMS Digital
+1,785+ documentos, 17 categorías, 10 hooks automáticos. Embajador del conocimiento. Consultar ANTES de ejecutar, registrar DESPUÉS de cerrar.
+
+### 12.3 Natural Progression Engine
+FSM lifecycle de tiendas: SOURCE_VERIFIED → EXTRACTING → PERSISTED → CES_EVALUATED → PUBLISHED → BROWSER_VERIFIED → CERTIFIED. Outbox durable, closure_contract, auto-chain controlado.
+
+### 12.4 Políticas operativas
+- **Todo a vitrina, cero draft** — la información del proveedor no es basura
+- **Replicar, no construir** — el modelo IMBRA ya existe
+- **Si no se ve en browser, no está hecho** — browser tribunal #ND-25
+- **Enforcement Engine es el ÚNICO gateway a Shopify**
+- **BORRÓN = wipe 3 capas** (Shopify + PG + ChromaDB) antes de reprocesar
+- **Escalera de muestras:** 1→5→25→100→full, nunca blind mass runs
+- **IMBRA/BARA selladas** — intocables por automatización
+- **skip_kb_enrichment=True default** — evita Gemini 429
+
+---
+
+## 13. INFRAESTRUCTURA TÉCNICA
+
+| Componente | Tecnología | Puerto |
+|-----------|-----------|--------|
+| Servidor | DigitalOcean 64.23.170.118, Ubuntu | — |
+| Pipeline V25.22+ | Python uvicorn | :8805 |
+| Gateway API | Python (50+ endpoints) | :8815 |
+| PostgreSQL | 91+ tablas | :5432 |
+| ChromaDB | 26,767+ docs motos | :8000 |
+| Voice Agent | ElevenLabs container | :7777 |
+| ODI Manager | API + Shopify frontend | :8820 / :8821 |
+| Wires | 6 Claude Code workers, timeout 3600s | — |
+| Volumen datos | /mnt/volume_sfo3_01 (sagrado read-only) | — |
+| Volumen workspace | /mnt/volume_sfo3_02 (ODI VISION) | — |
+| WhatsApp | Meta verified, +57 322 5462101 | — |
+| Shopify | 16 tiendas, Wompi gateway | — |
+| Vercel | cycle-nexus-pro (React 18) | — |
+
+---
+
+## 14. LO QUE SRM REVELÓ
+
+### 14.1 El pipeline es universal
+Lo que transforma catálogos de motos puede transformar catálogos de cualquier industria. El pipeline no era solo para motos — era el metabolismo de cualquier organismo digital industrial.
+
+### 14.2 El lenguaje técnico es el activo
+"El lenguaje verdadero viene desde la Enciclopedia." La estandarización del vocabulario técnico es el verdadero valor. Aplica a motos, a plomería, a odontología, a lotería.
+
+### 14.3 La gobernanza emerge naturalmente
+Guardian Layer, override humano, semáforo ético, auditoría cruzada — todo emergió de necesidades reales de SRM. No fue diseñado en abstracto — fue descubierto en la práctica.
+
+### 14.4 Industrias Leo cruza ecosistemas
+Leo es cliente SRM (fabrica bobinas para motos) Y es futuro fabricante del Muro de Lenz para SAT-CP. Un mismo actor conecta dos organismos. Eso es CATRMU.
+
+### 14.5 La fisiología es replicable
+Si funciona para BARA → IMBRA → ARMOTOS → cualquier proveedor → cualquier industria. La certificación A+ no es de BARA — es del pipeline. Y el pipeline es de ADSI.
+
+---
+
+## 15. BRECHAS Y PENDIENTES SRM
+
+### 15.1 Tiendas
+- STORE/CBI/VAISAND: pipeline desde cero (FSM respirando)
+- Checklist final en TODAS las tiendas una a una
+- Sesión dedicada imágenes (Nano Banana + Veo3) por tienda
+- IMBRA: confusión 3-mundos documentada, corregir cuando se deselle
+
+### 15.2 Pipeline pendiente
+- ImageMatcherV2 router 6 niveles (orquestador no existe)
+- FITMENT Engine como módulo pipeline (container muerto)
+- SKU ODI sistema completo (producto_alias no migrada)
+- CATRMU Taxonomía SQL (keywords inline no escalables)
+- Source Engine + Scheduler (660 líneas desconectadas)
+- Self-Healing Nocturno (diseñado completo, no implementado)
+- Product Provenance (gap arquitectónico)
+- Billing real (billing.py NO EXISTE)
+
+### 15.3 Comercial
+- Primera compra real controlada pendiente (BALINERA 6006-X2 en BARA preparada)
+- medicion_solo: true → no cobra hasta firma del arquitecto
+- n8n billing sensors no creados
+- Switch billing real pendiente de aprobación
+
+### 15.4 Frontend
+- 9 endpoints diseñados para conectar frontend SRM con backend ODI (solo 2 operativos)
+- clients.json estático (debería ser dinámico vía API)
+- Playwright 24/7 servicio permanente no implementado
+
+---
+
+## 16. ROADMAP SRM → ADSI → CATRMU
+
+| Fase | Nombre | Estado |
+|------|--------|--------|
+| **Fase 1** | Consolidación Motor + Red Inicial (16 tiendas, pipeline v25) | 🔄 EN CURSO |
+| **Fase 2** | Plataformas de Rol (App B2C clientes, App Talleres, Academia) | ⏳ DISEÑADA |
+| **Fase 3** | APIs + Expansión Red (+500 socios, APIs para grandes importadores) | ⏳ VISIÓN |
+| **Fase 4** | Expansión Geográfica (Ecuador, Perú, modelo tecnológico probado) | ⏳ VISIÓN |
+
+---
+
+## 17. PERSONAS SRM
+
+| Persona | Rol | Relación |
+|---------|-----|----------|
+| **Juan David Jiménez Sierra** | Arquitecto CATRMU-ADSI-ODI | Creador del ecosistema |
+| **Jorge Luis Jiménez** | SRM Motos, 35+ años industria | Papá. Dominio knowledge anchor |
+| **Jorge Grajales** | Asesor Bara | Contacto comercial |
+| **Tony Maestro** | Voz IA (ElevenLabs) | Agente de voz SRM |
+| **Ramona Anfitriona** | Voz IA (ElevenLabs) | Hospitalidad LiveODI |
+
+---
+
+## 18. DOCTRINAS SRM
+
+1. "No construimos una tienda. Construimos el ecosistema."
+2. "El problema no era data sucia. Era falta de modelo de gobierno."
+3. "El lenguaje verdadero viene desde la Enciclopedia."
+4. "Todo a vitrina. Cero draft. La información del cliente no es basura."
+5. "Replicar el modelo, no construir."
+6. "Si no se ve en browser, no está hecho."
+7. "3 mundos: transmisión mecánica ≠ distribución motor ≠ eléctrico."
+8. "Watermark del proveedor se respeta."
+9. "Enforcement Engine es el ÚNICO gateway a Shopify."
+10. "IMBRA/BARA selladas — intocables por automatización."
+11. "Cada tienda nace de su propio perfil + su propio logo, sin residuo IMBRA."
+12. "La certificación A+ no es de BARA — es del pipeline."
+13. "SRM fue el prototipo, ADSI es el organismo, CATRMU es el futuro."
+14. "CATRMU = SRM-OS + ADSI + Ontologías multi-industria."
+15. "Sin Knowledge Integrator no existe SRM-OS. Con él, SRM se convierte en un cerebro."
+
+---
+
+*"Todo lo que existe en el ecosistema ADSI fue construido y probado primero en SRM."*
+
+*Somos Industrias ODI.*

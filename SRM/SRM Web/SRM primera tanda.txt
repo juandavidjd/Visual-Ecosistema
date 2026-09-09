@@ -1,0 +1,821 @@
+Este es SRM, lo que en browser es real, es la primera idea de arquitectura para el resto de habitantes del ecosistema, el cual se ve destinado a unirse al cambio visual claro está igual se conserva lo que es constante la cual es arquitectura del ecosistema y haciendo que la experiencia solo adopte la variable habitante, colaboración, absorción, etc este tema se puede consultar en orígenes. No solo lo visual el core pipeline conecta a todo con todo, terminarlo, probarlo certificarlo de punta a punta, ya hay ordenes enviadas darles seguimiento y avanzar. De la documentación a hoy a habido evolución, por tanto, de la idea inicial a hoy ya tiene recorrido. Esta es la primera tanda de info que te voy a compartir de SRM. # RADIOGRAFÍA COMPLETA DEL ORGANISMO ODI 
+
+## Organismo Digital Industrial — Estado al 19 de Junio de 2026 
+
+## Arquitecto: Juan David Jiménez Sierra · CATRMU-ADSI-ODI 
+
+## Compilado de toda la documentación del proyecto SRM 
+
+ 
+
+--- 
+
+ 
+
+> "No construimos una tienda. Construimos el ecosistema." 
+
+> "ODI no es software. Es un organismo digital con anatomía, fisiología y propósito." 
+
+ 
+
+--- 
+
+ 
+
+## 1. IDENTIDAD DEL ORGANISMO 
+
+ 
+
+| Campo | Valor | 
+
+|-------|-------| 
+
+| **Nombre** | ODI — Organismo Digital Industrial | 
+
+| **Ciencia que lo gobierna** | IICA — Inteligencia Industrial Cognitiva Ambiental | 
+
+| **Pulso Cognitivo** | Percibir → Interpretar → Razonar → Actuar → Aprender | 
+
+| **Cerebro ejecutivo** | SRM-OS (toma de decisiones) | 
+
+| **Corteza prefrontal** | Knowledge Integrator (semántica, taxonomía) | 
+
+| **Sistema sensorial-motor** | ADSI (ingesta y acción) | 
+
+| **Sistema nervioso** | n8n (orquestación) | 
+
+| **Voz/Oído** | ElevenLabs (agentes de voz) | 
+
+| **Piel/Interfaz** | LiveODI / Lovable (punto de contacto humano) | 
+
+| **Gobernanza/Expansión** | CATRMU (ecosistema económico multi-industrial) | 
+
+| **Filosofía** | ADSI = Análisis · Diseño · Desarrollo · Implementación | 
+
+| **Marco operativo** | K·C·T × ADSI (Conocimiento/Colaboración/Tecnología) | 
+
+| **Modelo gobernante** | INGESTION → GOVERNANCE → COMMERCE | 
+
+| **Servidor** | DigitalOcean 64.23.170.118 | 
+
+| **Repositorio** | juandavidjd/odi-vende (main) | 
+
+| **Primera industria viva** | IND_MOTOS (repuestos motocicletas Colombia) | 
+
+ 
+
+--- 
+
+ 
+
+## 2. ARQUITECTURA — LOS 3 PILARES 
+
+ 
+
+### Pilar 1: SRM-OS (Cerebro) 
+
+El sistema operativo industrial. Contiene el pipeline V25.22+ con 26 pasos implementados que transforman datos crudos en tiendas completas. Knowledge Integrator como corteza prefrontal: 7 funciones maestras (ingesta multi-fuente, análisis semántico, normalización, taxonomía, ontología, enriquecimiento, exportación). 
+
+ 
+
+### Pilar 2: Unificación de Clientes (9 → 1) 
+
+16 proveedores (IMBRA, BARA, JAPAN, LEO, YOKOMAR, MCLMOTOS, DUNA, VITTON, OH, KAIQI, DFG, DARROW, ARMOTOS, CBI, STORE, VAISAND) unificados bajo un solo ecosistema Shopify + landing SRM. Cada uno con su identidad, su branding, su catálogo — pero todos bajo el estándar ODI. 
+
+ 
+
+### Pilar 3: Voice Agent (Agente de Voz) 
+
+ElevenLabs SRM AudioPedidos Agent. El agente que recibe pedidos por voz, interpreta el lenguaje empírico del mecánico ("¿Tienen la vela pa' la Boxer?"), traduce a lenguaje técnico y responde con producto + precio + disponibilidad. 
+
+ 
+
+--- 
+
+ 
+
+## 3. VERTICALES DEL ORGANISMO 
+
+ 
+
+### 3.1 MOTOS / SRM (Vertical principal — VIVA) 
+
+- **Qué es:** Ecosistema de 16 tiendas Shopify para la industria de repuestos de motocicletas en Colombia 
+
+- **33,000+ productos** across 15 suppliers 
+
+- **Pipeline V25.22+:** 26 pasos implementados (Step -2 → Step 12.6) 
+
+- **Bootstrapper enchufable:** brand.json → tienda completa 
+
+- **Landing SRM:** somosrepuestosmotos.com 
+
+- **Estado:** OPERANDO · tiendas publicadas · pipeline procesando 
+
+ 
+
+### 3.2 P10 / PROFESIONALES10 (Caso 002 — EN CONSTRUCCIÓN) 
+
+- **Qué es:** Red profesional verificada para la comunidad hispana en Miami-Dade, Florida 
+
+- **Cliente:** Martha L Pique, Profesionales10 LLC 
+
+- **Contrato:** 6 meses × $3,700,000 COP/mes (pagos 1 y 2 recibidos) 
+
+- **Backend:** :8825 (50 endpoints), 10 tablas PG, 7 motores Python, 7 gates verificación 
+
+- **ChromaDB:** 201 docs, 63 categorías bilingüe ES/EN 
+
+- **Frontend:** profesionales10.online (Vercel, 7 pantallas) 
+
+- **Estado:** Mes 4 de 6 · backend completo · falta primer profesional real 
+
+ 
+
+### 3.3 T10 / TEVEO10 (Caso 002 — EN CONSTRUCCIÓN) 
+
+- **Qué es:** Plataforma de comunidad y conexiones para hispanos en Florida 
+
+- **Backend:** :8826 (19 endpoints) 
+
+- **Frontend:** teveo10.club (10 rutas, carruseles, fichas, Design System ODI) 
+
+- **Estado:** Plataforma base completa · falta activación real 
+
+ 
+
+### 3.4 COVER'S / Salud Oral (INICIADO) 
+
+- **Qué es:** Primera vertical no-motos. Dispositivos de salud oral 
+
+- **Líneas:** MEDICAL COVER'S (bruxismo B2B), SMOKOVER (fumadores B2C), SPORT COVER'S (deportistas) 
+
+- **Dominios:** mis-cubiertas.com, cabezasanas.com 
+
+- **ChromaDB:** odi_ind_salud_oral (27 docs, 180 papers pendientes de indexar) 
+
+- **Socia:** Alejandra 
+
+- **Estado:** INICIADO · landing publicada · falta intake de productos reales 
+
+ 
+
+### 3.5 MATZU DENTAL / Turismo (INICIADO) 
+
+- **Qué es:** Turismo dental. Cotización 360° con procedimientos, logística, ahorro por país 
+
+- **Dominio:** matzudentalaesthetics.com 
+
+- **Backend:** Botón Turismo con 22 pisos, ciclo completo paciente, 5 crons, ledger SHA-256 
+
+- **BookingOrchestrator:** 4 adapters, widget 208KB 
+
+- **Socios:** Carlos + Paola 
+
+- **Estado:** Backend avanzado · tienda Shopify no existe · 7 procedimientos sin ingestar 
+
+ 
+
+### 3.6 HEALTHCARE (PARCIAL) 
+
+- **Qué es:** Salud domiciliaria. Caso 000 fundacional 
+
+- **Cliente:** Angela — Prestige LHC, Ms Multi Services LLC 
+
+- **Estado:** Modelo de origen. Patrón heredado a P10/T10 
+
+ 
+
+### 3.7 RADAR DE PREMIOS (VIVO ISLA) 
+
+- **Qué es:** Análisis estadístico de juegos de azar colombianos 
+
+- **Versión:** v3.1.0, 15/23 disciplinas, 45 juegos 
+
+- **Datos:** 52,989 resultados históricos, 366 evaluaciones en 14 días 
+
+- **Precisión:** 32% coincidencia promedio, generador determinístico 
+
+- **Frontend:** Interfaz completa con 34 juegos, cerrados/histórico/mi radar 
+
+- **Estado:** VIVO OPERANDO · ciclo diario autónomo · conectado a QMS via Hook 
+
+ 
+
+### 3.8 SOMOSTURISMO (VISIÓN) 
+
+- **Qué es:** Plataforma de turismo. María Teresita (mamá) 
+
+- **Estado:** Visión documentada · sin implementación activa 
+
+ 
+
+### 3.9 SAT-CP (VISIÓN) 
+
+- **Qué es:** ODI en punto de venta / hardware (cámara, código de barras, Bluetooth, NFC) 
+
+- **Concepto:** "Usuario instala ODI en su PC, ODI detecta cámara y lector, pregunta '¿Quieres que capture tu inventario?', escanea, registra, genera tienda" 
+
+- **Estado:** Diseñado · requiere prototipo físico con Industrias Leo 
+
+ 
+
+--- 
+
+ 
+
+## 4. INFRAESTRUCTURA RUNTIME 
+
+ 
+
+### 4.1 Servidor 
+
+- **IP:** 64.23.170.118 (DigitalOcean SFO3) 
+
+- **OS:** Ubuntu 
+
+- **Usuario:** odi (servicios) / root (admin) 
+
+- **Volúmenes:** /mnt/volume_sfo3_01 (data), /mnt/volume_sfo3_02 (ODI VISION) 
+
+ 
+
+### 4.2 Servicios y Puertos 
+
+ 
+
+| Puerto | Servicio | Estado | 
+
+|--------|----------|--------| 
+
+| :8805 | Pipeline V25.22+ (odi_pipeline_integrated) | ✅ VIVO | 
+
+| :8815 | Gateway API (50+ endpoints) | ✅ VIVO | 
+
+| :8825 | P10 Backend (50 endpoints) | ✅ VIVO | 
+
+| :8826 | T10 Backend (19 endpoints) | ✅ VIVO | 
+
+| :8000 | ChromaDB | ✅ VIVO | 
+
+| :5432 | PostgreSQL | ✅ VIVO | 
+
+| :7777 | Voice Agent Tony (ElevenLabs) | ✅ VIVO | 
+
+| :9002 | Playwright container | PARCIAL | 
+
+ 
+
+### 4.3 Wires (Workers Claude Code) 
+
+- 6 wires paralelos (odi-wire1 → odi-wire6) 
+
+- Timeout: 3600s 
+
+- Auto-restart on "Credit balance too low" 
+
+- Guard por-wire (no collision) 
+
+- Consulta Orígenes pre-dispatch 
+
+ 
+
+### 4.4 Bases de Datos 
+
+- **PostgreSQL:** 91+ tablas (pipeline, tiendas, P10, T10, dispatch, QMS, billing, etc.) 
+
+- **ChromaDB:** 4 colecciones (odi_ind_motos 26,767 docs, odi_ind_salud_oral 27 docs, odi_servicios 63 cats, odi_global) 
+
+ 
+
+### 4.5 APIs Externas 
+
+ 
+
+| API | Estado | Uso | 
+
+|-----|--------|-----| 
+
+| Shopify Admin | ✅ 16 tokens | CRUD productos/temas/colecciones | 
+
+| OpenAI GPT | ✅ Billing OK | Fichas, narrativa, GPT Vision QC | 
+
+| Google Gemini | ✅ Billing OK | Nano Banana (imágenes), Veo3 (video), Vision | 
+
+| Claude API | ❌ Sin crédito | Failover, CES prefiere Claude pero cae a Gemini/GPT | 
+
+| Claude Max Plan | ✅ | Claude Code (wires, sesión directa) | 
+
+| ElevenLabs | ✅ | Voice Agent | 
+
+| Meta WhatsApp | ✅ 7 templates | Lead capture, confirmaciones | 
+
+| IONOS | ✅ | Correos profesionales P10/T10 | 
+
+ 
+
+--- 
+
+ 
+
+## 5. CAPÍTULO TIENDAS — 16 STORES 
+
+ 
+
+### 5.1 Estado por Tienda 
+
+ 
+
+| Tienda | Productos | Active | Tipo | Grade | Fotos | Categorías | Fichas 8-sec | Estado | 
+
+|--------|-----------|--------|------|-------|-------|------------|-------------|--------| 
+
+| IMBRA | 1,119 | 1,119 | Fabricante | A+ | ✅ | 7 | ✅ | 🔒 SELLADA P13 Gold | 
+
+| BARA | 965 | 965 | Importador | A | ✅ | 7 | ✅ | ✅ BARA level | 
+
+| JAPAN | 564 | 564 | Fabricante | A | ✅ | 5 | ✅ | ✅ BARA level | 
+
+| LEO | 211 | 211 | Fabricante | A | ✅ | 1 (eléctrico) | ✅ | ✅ BARA level | 
+
+| YOKOMAR | 857 | 857 | Importador | B+ | ✅ | 8 | ✅ | ✅ BARA level | 
+
+| MCLMOTOS | 276 | 276 | Distribuidor | B | ✅ | 7 | ✅ | ✅ BARA level | 
+
+| DUNA | 875 | 875 | Importador | B | Parcial | 7 | ✅ | ✅ Categorizada | 
+
+| VITTON | 1,257 | 1,250 | Distribuidor* | B | 9% | 5 | ✅ | ✅ Cert versionado | 
+
+| OH | 1,426 | 1,414 | Importador | B | 0% | 8 | ✅ | ✅ Bootstrap estructura | 
+
+| KAIQI | 458 | 343 | Distribuidor* | B | 30% | 8 | ✅ | ✅ Bootstrap estructura | 
+
+| DFG | 6,204 | 6,204 | Importador | B | 6.6% (421) | 10 | ✅ | ✅ Cert runtime | 
+
+| DARROW | 1,654 | 1,654 | Distribuidor | C | 32% (682) | 12 | ✅ | ✅ BARA estructura | 
+
+| ARMOTOS | 2,136 | 2,136 | Distribuidor | B | 32% (682) | 13 | ✅ | ✅ BARA estructura | 
+
+| CBI | 67 | 24 | — | C | — | — | 🔄 | 🔄 Pipeline desde cero | 
+
+| STORE | 59 | 59 | — | C | — | — | 🔄 | 🔄 FSM BROWSER_VERIFIED | 
+
+| VAISAND | 50 | 50 | — | — | — | — | 🔄 | 🔄 FSM PERSISTED | 
+
+ 
+
+**Total: ~17,178 productos activos en el ecosistema** 
+
+ 
+
+### 5.2 Pipeline V25.22+ (26 pasos implementados) 
+
+Step -2 Preflight → Step -1 Backup → Step 0 Guardian → Step 0.5 Source Extractor (12 extractores) → Step 1 SourceReader → Step 1.5 Pre-merge → Step 1.96 Title Humanizer → Step 1.97 NarrativeEnricher → Step 2 FichaEngine (8 secciones odi-ficha7) → Step 2.5 CATRMU Categories (3-mundos) → Step 2.6 KB Enrichment (skip default) → Step 3 Images → Step 3.94 Watermark Gate → Step 4 Enforcement Engine (todo-a-vitrina) → Step 5 BrandingManager → Step 5.95 Fichas Publisher → Step 6 AuditQuality → Step 6.5 CES Content Gate → Step 6.5.1 Demoter → Step 6.9 Reconcile PG↔Shopify → Step 7 StorefrontBuilder → Step 8 Playwright Verify → Step 9 Grade → Step 10 Store Profile → Step 11 Landing Publisher → Step 12 Bootstrapper (12.1-12.6) 
+
+ 
+
+### 5.3 Extractores Construidos (12) 
+
+CSVExtractor · ExcelExtractor · MagentoWebExtractor · WooCommerceWebExtractor · DunaWebExtractor · SpatialPDFExtractor · GridPDFExtractor · TabularPDFExtractor · AutoPDFExtractor · MultiSourceReader · odi_web_scraper · OCR binarize+tesseract 
+
+ 
+
+### 5.4 Bootstrapper Enchufable 
+
+`POST /pipeline/start {"store":"NUEVA"}` → brand.json entra → tienda completa sale. 416 assets tokenizados de IMBRA P13. Template universal. Sin wires especiales, sin afinamiento, sin debugging. 
+
+ 
+
+--- 
+
+ 
+
+## 6. ÓRGANOS Y SISTEMAS VIVOS 
+
+ 
+
+### 6.1 Orígenes (QMS Digital — VIVO) 
+
+- 1,785+ documentos, 17 categorías QMS, 14 órganos 
+
+- 10 hooks automáticos: pipeline_run, error_registered, correction_applied, wire_complete, gate_triggered, architect_directive, new_platform, store_certified, commits_pushed, consultation_gap 
+
+- 5 tablas PG: origenes_documentos, origenes_consultas, origenes_hooks, origenes_metrics, origenes_growth 
+
+ 
+
+### 6.2 CES — Constitutional Enforcement System (VIVO) 
+
+- 15 principios, 32/32 tests, 5 fases (A→C.2) 
+
+- 147+ decisiones en audit trail 
+
+- FichaJudge como Enforcement Gate (C.3) con 100% precisión 
+
+- Gate ALWAYS_HUMAN para full runs 
+
+- Canal limpio: 26ms ALLOWED, 17ms BLOCKED 
+
+ 
+
+### 6.3 Natural Progression Engine (RESPIRANDO) 
+
+- FSM lifecycle: SOURCE_VERIFIED → EXTRACTING → PERSISTED → CES_EVALUATED → PUBLISHED → BROWSER_VERIFIED → CERTIFIED 
+
+- Outbox durable, bridge, closure_contract, auto-chain controlado 
+
+- 7 capacidades demostradas: respirar, metabolizar externamente, detenerse por evidencia, repararse sin destruir, juzgar calidad, refinar reglas, identificar bloqueadores 
+
+ 
+
+### 6.4 ADV — Aliento de Vida (Fase 1) 
+
+- Fórmula 4D: volume 30%, recency 25%, diversity 25%, implicit human feedback 20% 
+
+- Kill switch ADV_PIPELINE_OBSERVE=0 
+
+ 
+
+### 6.5 Dispatch (VIVO) 
+
+- odi_dispatch_tasks + odi_dispatch_containers en PG 
+
+- 6 wires con guard por-wire 
+
+- Auto-handoff entre wires 
+
+ 
+
+### 6.6 LiveODI Agent / Hábitat (VIVO) 
+
+- 10/10 servicios, 23 flows 
+
+- Voz bidireccional, session memory 
+
+- ReturnCard, Modo HER v2.0 
+
+- Esfera ODI universal en toda tienda → liveodi.com 
+
+ 
+
+### 6.7 Radar de Premios (VIVO ISLA) 
+
+- v3.1.0, ciclo diario autónomo 
+
+- 52,989 resultados, 32% precisión 
+
+- Conectado a QMS via Hook 
+
+ 
+
+--- 
+
+ 
+
+## 7. FRENTES K·C·T (25 activos) 
+
+ 
+
+### K — Conocimiento (5) 
+
+chromadb_kb · dna_essence · memoria_infra · origenes · radar 
+
+ 
+
+### C — Colaboración (11) 
+
+accesibilidad · ces · ces_content_gate · cross_audit · habitante_journey · odi_humans · odi_manager · p10_t10 · p10_verification · seguridad · tribunal_v3 
+
+ 
+
+### T — Tecnología (9) 
+
+adv · billing_ledger · claude_autonomous · code_task · flujos · liveodi · odi_fisico · pipeline · postgresql 
+
+ 
+
+--- 
+
+ 
+
+## 8. DOCUMENTACIÓN GENERADA (corpus canónico) 
+
+ 
+
+| Documento | Tipo | Contenido | 
+
+|-----------|------|-----------| 
+
+| VISION_COMPLETA_SRM.md | Corpus | 18 secciones, 60+ PDFs sintetizados | 
+
+| PROCESO_IMBRA_P13_COMPLETO.md | Proceso | 33 pasos, 14 errores, 14 reglas, 11 gates | 
+
+| P10_T10_DOCUMENTO_CONSTITUCIONAL.md | Constitucional | 621 líneas, caso 002 completo | 
+
+| RADIOGRAFIA_ECOSISTEMA_V2.md | Radiografía | 18,424 chars, 7 secciones | 
+
+| RADIOGRAFIA_ORGANOS_MULTIVERTICAL.md | Radiografía | 20,871 chars, 9 órganos | 
+
+| PROTOCOLO_COORDINACION_AUTONOMA.md | Protocolo | Coordinación inter-equipos | 
+
+| INVENTARIO_COMPLETO_FRENTES_PENDIENTES.md | Inventario | 33+ frentes con estado | 
+
+| PIPELINE_MAPA_COMPLETO_PASOS.md | Pipeline | 26 implementados + 16 diseñados | 
+
+| CONTRATO_SERVICIOS_V2.docx | Legal P10 | 8 cláusulas | 
+
+| NDA_REV4.docx | Legal P10 | 13 cláusulas, IP tripartita | 
+
+| PROPUESTA_COMERCIAL_P10_T10.docx | Comercial | 7 secciones | 
+
+| REPORTE_MES1_P10_T10.pdf | Reporte | Mes 1 Martha | 
+
+| REPORTE_MES2_P10_T10.pdf | Reporte | Mes 2 Martha | 
+
+| 13 project tarballs en Orígenes | Archivos | ODI, RADAR, P10, HEALTHCARE, etc. | 
+
+ 
+
+--- 
+
+ 
+
+## 9. ROADMAP 4 FASES 
+
+ 
+
+| Fase | Objetivo | Estado | 
+
+|------|----------|--------| 
+
+| **Fase 1 (Actual)** | Consolidación del Motor y Red Inicial — Motor IA v25 en producción, onboarding de los primeros proveedores en Colombia | 🔄 EN CURSO — 16 tiendas, pipeline operando | 
+
+| **Fase 2 (Próximos 12 meses)** | Lanzamiento de Plataformas de Rol — App B2C para clientes finales, App para Talleres, academia, gestión de servicios | ⏳ DISEÑADA | 
+
+| **Fase 3 (12-24 meses)** | Expansión de la Red y APIs — APIs para grandes importadores/distribuidores, crecimiento a +500 socios | ⏳ VISIÓN | 
+
+| **Fase 4 (24+ meses)** | Expansión Geográfica — Ecuador y Perú, apalancando modelo tecnológico probado | ⏳ VISIÓN | 
+
+ 
+
+--- 
+
+ 
+
+## 10. PERSONAS Y ROLES 
+
+ 
+
+| Persona | Rol | Vertical | Estado | 
+
+|---------|-----|----------|--------| 
+
+| **Juan David Jiménez Sierra** | Arquitecto CATRMU-ADSI-ODI | Todo | ACTIVO — líder del ecosistema | 
+
+| **Jorge Luis** | Papá, SRM | Motos | ACTIVO — 15 tiendas Shopify | 
+
+| **Martha L Pique** | Representante Legal P10/T10 | Servicios | ACTIVA — caso 002, pagó | 
+
+| **Manuela Aristizábal** | Contenido P10/T10 | Servicios | ALIADA | 
+
+| **Angela** | Prestige LHC / Ms Multi Services | Healthcare | Caso 000 fundacional | 
+
+| **Carlos + Paola** | Matzu Dental Aesthetics | Turismo dental | INICIADO | 
+
+| **Alejandra** | COVER'S | Salud oral | INICIADO | 
+
+| **María Teresita** | Mamá, somosturismo | Turismo | VISIÓN | 
+
+ 
+
+--- 
+
+ 
+
+## 11. DOCTRINAS Y PRINCIPIOS (selección) 
+
+ 
+
+1. "Primero verdad, luego belleza" — PostgreSQL antes que visual 
+
+2. "El problema no era data sucia. Era falta de modelo de gobierno" 
+
+3. "Todo a vitrina. Cero draft. La información del cliente no es basura" 
+
+4. "Replicar el modelo, no construir" 
+
+5. "Si no se ve en browser, no está hecho" 
+
+6. "idea → ejecución → evidencia → deuda concreta. No abrir 5 frentes" 
+
+7. "Cada tienda nace de su propio perfil + su propio logo, sin residuo IMBRA" 
+
+8. "Los wires consultan Orígenes, ejecutan, reúnen data, entregan a Orígenes" 
+
+9. "Cero deuda técnica — política de operación activa" 
+
+10. "Visible face ≠ root cause" (#ND-30) 
+
+11. "Explicit context > inferred heuristics" (#ND-31) 
+
+12. "#21 NO INVENTA — campo null = omitir, nunca fabricar" 
+
+13. "3 mundos: transmisión mecánica ≠ distribución motor ≠ eléctrico" 
+
+14. "Watermark del proveedor se respeta — es su marca en sus productos" 
+
+15. "El arquitecto firma para avanzar, no para repetir lo ya dicho" 
+
+ 
+
+--- 
+
+ 
+
+## 12. BRECHAS Y PENDIENTES CRÍTICOS 
+
+ 
+
+### Tiendas 
+
+- STORE/CBI/VAISAND: pipeline desde cero (FSM respirando, no completas) 
+
+- DARROW: fotos pendientes vía extractor espacial compartido 
+
+- IMBRA: confusión 3-mundos documentada, sellada — corregir cuando se deselle 
+
+- Checklist final todas las tiendas una a una 
+
+- Sesión dedicada imágenes (Nano Banana + Veo3) para todas 
+
+ 
+
+### Pipeline 
+
+- ImageMatcherV2 router 6 niveles: orquestador no existe 
+
+- FITMENT Engine: muerto como container, reimplementar como módulo 
+
+- SKU ODI: tabla producto_alias no migrada 
+
+- CATRMU Taxonomía SQL: keywords inline no escalables 
+
+- Source Engine + Scheduler: 660 líneas desconectadas 
+
+- Self-Healing Nocturno: diseñado completo, no implementado 
+
+- Product Provenance: gap arquitectónico 
+
+- Billing real: billing.py NO EXISTE 
+
+ 
+
+### P10/T10 
+
+- Firma contrato por socias: 3 meses pendiente 
+
+- Primer profesional real por 7 gates: nunca completado 
+
+- Mensajería directa, calificaciones, traducción bilingüe: Mes 3 comprometido 
+
+- Procesador pagos, embudos, referidos: Mes 4 comprometido 
+
+ 
+
+### Multi-industria 
+
+- COVER'S: 180 papers sin indexar, sin intake productos 
+
+- Matzu: 7 procedimientos sin ingestar, tienda no existe 
+
+- odi_servicios ChromaDB: vacía para P10 
+
+ 
+
+### Gobernanza 
+
+- Claude API sin crédito (failover cubre) 
+
+- ISO 9001 + ISO/IEC 42001: investigación hecha, certificación no iniciada 
+
+- Radiografía 33 frentes: orden emitida, pendiente ejecución 
+
+ 
+
+--- 
+
+ 
+
+## 13. MÉTRICAS DEL ORGANISMO 
+
+ 
+
+| Métrica | Valor | 
+
+|---------|-------| 
+
+| Tiendas Shopify | 16 | 
+
+| Productos totales activos | ~17,178 | 
+
+| Documentos Orígenes | 1,785+ | 
+
+| Categorías QMS | 17 | 
+
+| Hooks automáticos | 10 | 
+
+| Endpoints API gateway | 50+ | 
+
+| Endpoints P10 | 50 | 
+
+| Endpoints T10 | 19 | 
+
+| Wires paralelos | 6 | 
+
+| Extractores construidos | 12 | 
+
+| Pasos pipeline implementados | 26 | 
+
+| Pasos pipeline diseñados | 16+ | 
+
+| Frentes K·C·T | 25 | 
+
+| Verticales | 7 (motos, P10, T10, COVER'S, Matzu, Healthcare, Radar) | 
+
+| ChromaDB docs | 26,767+ (motos) + 201 (servicios) + 27 (salud oral) | 
+
+| Doctrinas formalizadas | 47+ | 
+
+| PDFs del proyecto | 60+ | 
+
+| Commits en odi-vende | 100+ | 
+
+ 
+
+--- 
+
+ 
+
+*"No construimos una tienda. Construimos el ecosistema."* 
+
+*"Sin Knowledge Integrator no existe SRM-OS. Con él, SRM se convierte en un cerebro."* 
+
+*"CATRMU = SRM-OS + ADSI + Ontologías multi-industria"* 
+
+ 
+
+*Somos Industrias ODI.*. Aquí tienes el texto extraído de la imagen, uniendo las líneas de cada archivo para formar los nombres completos: 
+
+ 
+
+* `screencapture-somosrepuestosmotos-intelligent-2026-06-20-04_00_40` 
+
+* `screencapture-somosrepuestosmotos-intelligent-2026-06-20-04_00_51` 
+
+* `screencapture-somosrepuestosmotos-academia-2026-06-20-04_01_04` 
+
+* `screencapture-somosrepuestosmotos-auth-2026-06-20-04_01_12` 
+
+* `screencapture-somosrepuestosmotos-2026-06-20-03_57_45` 
+
+* `screencapture-somosrepuestosmotos-catalogo-2026-06-20-04_00_01` 
+
+* `screencapture-somosrepuestosmotos-clientes-2026-06-20-04_00_17` 
+
+* `screencapture-somosrepuestosmotos-intelligent-2026-06-20-04_00_27`La documentación del proyecto es inmensa — 60+ PDFs con la visión completa. Voy a generar la radiografía en un documento profesional. Dame unos minutos para compilar todo.La documentación es masiva — 60+ PDFs, documentos constitucionales, reportes, inventarios. Generando la radiografía completa como documento profesional. Esto toma un momento por el volumen.Radiografía completa del organismo ODI — 384 líneas, 13 secciones, sin perder detalle: 
+
+ 
+
+1. **Identidad** — ODI como organismo digital, IICA, pulso cognitivo, arquitectura bio-inspirada 
+
+2. **3 Pilares** — SRM-OS (cerebro), Unificación 9 Clientes, Voice Agent 
+
+3. **7 Verticales** — Motos, P10, T10, COVER'S, Matzu, Healthcare, Radar + SAT-CP y Turismo en visión 
+
+4. **Infraestructura Runtime** — servidor, 8 puertos, 6 wires, PG 91+ tablas, ChromaDB 4 colecciones, 7 APIs externas 
+
+5. **16 Tiendas** — estado por tienda (productos, fotos, categorías, fichas, grade) 
+
+6. **Órganos Vivos** — Orígenes, CES, Natural Progression, ADV, Dispatch, LiveODI, Radar 
+
+7. **25 Frentes K·C·T** — clasificación completa 
+
+8. **Documentación** — corpus canónico (constitucionales, procesos, reportes, legales) 
+
+9. **Roadmap 4 Fases** — consolidación → plataformas rol → APIs → expansión geográfica 
+
+10. **Personas y Roles** — 8 actores clave con vertical 
+
+11. **15 Doctrinas** — principios inviolables 
+
+12. **Brechas Críticas** — tiendas, pipeline, P10/T10, multi-industria, gobernanza 
+
+13. **Métricas** — 17,178 productos, 1,785 docs Orígenes, 26 pasos pipeline, 12 extractores 
+
+ 
+
+Todo compilado de los 60+ PDFs del proyecto + contexto operativo real. 
+
+ 
+
+Somos Industrias ODI.
