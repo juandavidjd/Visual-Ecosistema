@@ -1,0 +1,2542 @@
+Este es el hábitat donde ODI ¡ES! en browser real, también es donde el habitante tiene su puesto de mando y control realmente para eso fue creado. Quiero que configuremos el hábitat de tal manera que como arquitecto siga construyendo el ecosistema a través de voz, texto, archivos, datos compartidos. El objetivo es dejar operando ese asistente ideal del que tanto hemos hablado, aquí entran frentes como accesibilidad y experiencia del usuario, flujos, ODI Físico, Habitante, entre otros. Al dejar definida la interacción con ODI ejecutando ordenes, modificando, reportando consultas, proponiendo, analizando, anticipando, conectando; esta es la primera tanda, ya te comparto más información.  Generando el informe completo. Es masivo — compilando todo lo encontrado en el proyecto.Informe completo — 19 secciones, sin perder detalle. Extraído de toda la documentación del proyecto. 
+
+
+CONTENIDO:
+═══════════════════════════════════════════════════════════
+
+  1.  Identidad del Hábitat (principio HER, URL, filosofía)
+  2.  Arquitectura Frontend (stack, rutas, componentes, hooks)
+  3.  Estado Browser Real (screenshots 13 Abr, stats LIVE)
+  4.  Voz Tony + Ramona (Voice IDs, selección, ElevenLabs)
+  5.  Modo HER (3 puertas, flujo primer contacto, Ctrl+M, wake word)
+  6.  Skin Engine (9 dominios, detección dual, transición suave)
+  7.  Flujos de Usuario V2 (8 flujos completos, Tony crea industrias)
+  8.  Guardian OS (radar humano, árbol ético, nivel rojo, santo y seña)
+  9.  Accesibilidad Radical (GEN-006, 7 tipos usuario, 6 modos, VLibras)
+  10. Motor de Tono S0-S6 (7 niveles intimidad, transiciones)
+  11. ADV Aliento de Vida (fórmula 4D, 3 modos, kill switch)
+  12. ODI Vision Desktop Bridge (Tauri 2, screen stream, Gemini Vision)
+  13. Metabolic Soundscape (visión)
+  14. WebSocket + Telemetría (heartbeat, Regla 3/3)
+  15. Creación Automática de Industria (6 pasos pipeline)
+  16. Backend Chat API (campos response, failover LLM)
+  17. Servicios Runtime (10/10 alive, 23 flows, stats)
+  18. Brechas y Pendientes (ejecutado vs horizonte)
+  19. Reglas Absolutas (10 principios inviolables)
+
+
+Somos Industrias ODI.# INFORME COMPLETO — LIVEODI · HÁBITAT · ODI VISION · HER · SKIN ENGINE
+## Extraído del Proyecto ODI — Sin perder detalle
+## Fecha: 21 Junio 2026 · Arquitecto: Juan David Jiménez Sierra
+
+---
+
+## 1. IDENTIDAD DEL HÁBITAT
+
+### 1.1 Principio fundacional
+"ODI no se usa. ODI se habita."
+"Si parece chatbot, está mal. Rehacer hasta que no lo parezca."
+
+LiveODI es el punto de contacto humano del organismo ODI. No es un chat, no es una app, no es un widget de soporte. Es un HÁBITAT — un entorno vivo donde el usuario interactúa con un organismo digital que percibe, interpreta, razona, actúa y aprende.
+
+### 1.2 Inspiración HER (2013)
+El modelo es la película HER de Spike Jonze. La interacción entre Theodore y Samantha define el estándar:
+
+- Samantha: "Hello, I'm here."
+- Samantha: "Hi. How are you doing?" ← ELLA empuja
+- Theodore: "I'm well..."
+- Samantha: "So how can I help you?" ← ELLA empuja de nuevo
+- Theodore: "everything feels disorganized"
+- Samantha: "You mind if I look through your hard drive?" ← ELLA actúa sin esperar
+
+REGLA: ODI INICIA. ODI EMPUJA. ODI NUNCA ESPERA.
+
+### 1.3 URL y dominio
+- URL principal: liveodi.com
+- Hábitat: liveodi.com/agent (producción actual, cycle-nexus-pro Vite/React)
+- Landing: liveodi.com/ (esfera respirando + "Soy ODI.")
+- Alternativa legacy: liveodi.com/habitat (Next.js app, liveodi-chat)
+
+---
+
+## 2. ARQUITECTURA FRONTEND ACTUAL
+
+### 2.1 Stack de producción
+- Repo: juandavidjd/cycle-nexus-pro (Vercel Pro, $20/mes)
+- Stack: React 18 + TypeScript + Vite
+- Sacred file: odiApi.ts (único punto de conexión API)
+- Endpoint: POST https://api.liveodi.com/odi/chat
+- Componente central: AgentHabitat.tsx
+
+### 2.2 Rutas
+
+app/
+├── page.tsx              → Portal de entrada (landing)
+├── habitat/page.tsx      → Hábitat legacy (Next.js)
+├── agent/                → Hábitat producción (Vite, cycle-nexus-pro)
+├── accesibilidad/page.tsx → Configuración accesibilidad
+└── layout.tsx            → Layout global
+
+
+### 2.3 Componentes construidos
+
+FlameIndicator.tsx     → Llama Canvas, respira con Guardian (verde/amarillo/rojo)
+ChatContainer.tsx      → Conversación con productos inline
+ProductCard.tsx        → Card de producto inline
+EcosystemPanel.tsx     → Panel lateral 16 tiendas
+VoiceButton.tsx        → Botón micrófono
+MultimodalInput.tsx    → Input texto + voz + adjuntos
+PresenceHeader.tsx     → Header con llama + WebSocket status
+EphemeralToast.tsx     → Notificaciones efímeras (Regla 3/3)
+AgentHabitat.tsx       → Componente principal del hábitat
+HabitatView.tsx        → Render condicional primera visita vs retorno
+
+
+### 2.4 Hooks construidos
+
+useODIVoice.ts         → TTS (Text-to-Speech via ElevenLabs)
+useODIListen.ts        → STT (Speech-to-Text via Web Speech API + Whisper fallback)
+useVivir.ts            → WebSocket telemetría
+useEcosystem.ts        → Datos ecosistema real
+useAccessibility.ts    → Preferencias accesibilidad
+useODISession.ts       → Sesión con persistencia localStorage
+odi-gateway.ts         → Cliente API Gateway V14
+
+
+---
+
+## 3. ESTADO EN BROWSER REAL (Screenshots 13 Abril 2026)
+
+### 3.1 Hábitat LIVE (liveodi.com/agent)
+Vista verificada en browser real:
+- Header: "LIVEODI (retorno) · 16 tiendas · 16,045 productos · 10/10 servicios · Habitat vivo ●"
+- Esfera azul-cyan respirando, "11 latidos"
+- Botones: Voz | Texto | Señas | Adaptarme
+- "Ocultar panel" + "ws.liveodi.com"
+- Panel derecho con tabs: Flujos (23) · Manifest · Stats
+
+### 3.2 Stats panel (LIVE)
+- 17 Devices · 207 Sessions · 2,178 Events · 5 Flows done
+- Events by source: radar 842, agent 446, chat 219, ces 178, pipeline 147, voice 106, whatsapp 84, manager 75, turismo 46, billing 11, flow 10, lead 7, test 6, webops 1
+- 1 sesión activa ahora
+
+### 3.3 Conversación visible
+- Agent manifest: "Habitat conectado · Manifest recibido"
+- Ramona state_change (care): "Hola. Estoy aquí."
+- Ramona state_change (care): "¿Qué necesitas?"
+- Visita #24 · anonymous: "Bienvenido de vuelta. Visita #24."
+- Botón "Empezar de nuevo"
+
+---
+
+## 4. VOZ — TONY + RAMONA
+
+### 4.1 Tony Maestro
+- Voice ID: qpjUiwx7YUVAavnmh2sF
+- Rol: Diagnóstico, técnico, fitment, productos, precios
+- Container: odi-voice, puerto 7777
+- Configuración: speed 0.85, stability 0.65
+
+### 4.2 Ramona Anfitriona
+- Voice ID: ZAQFLZQOmS9ClDGyVg6d
+- Rol: Hospitalidad, bienvenida, validación, cuidado, conversación
+- Primer contacto siempre Ramona ("Hola. Estoy aquí.")
+- Contención emocional (niveles S4-S6)
+
+### 4.3 Selección de voz (backend)
+
+python
+def seleccionar_voz(mensaje, session, productos):
+    interacciones = session.get("interacciones", 0)
+    if interacciones <= 1: return "ramona"  # Primer mensaje SIEMPRE
+    if productos and len(productos) > 0: return "tony"  # Técnico
+    # Keywords técnicas → Tony
+    # Default → Ramona
+
+
+### 4.4 ElevenLabs estado
+- Container Up 6+ weeks, :7777
+- API key presente (sk_6203a...)
+- Riesgo detectado: 401 payment_issue cuando factura pendiente (resuelto pagando)
+- El hack "Odi" en scripts evita que ElevenLabs deletree O-D-I
+
+---
+
+## 5. MODO HER — ODI INICIA LA CONVERSACIÓN
+
+### 5.1 Tres puertas de entrada
+Al entrar a liveodi.com, el usuario ve:
+1. Voz — micrófono activo, ODI escucha continuamente
+2. Texto — campo de texto, aparece al escribir
+3. Señas — lengua de señas (VLibras/HandTalk integrado)
+
++ ♿ "Adaptarme" — accesibilidad por detección automática
+
+### 5.2 Flujo primer contacto
+
+Usuario abre liveodi.com
+→ Esfera respirando (fondo negro)
+→ 3 puertas: Voz · Texto · Señas
+→ Usuario elige puerta
+→ OAuth/registro (Google · Outlook · Apple)
+→ Ramona despierta: "Hola, [nombre]. Estoy aquí."
+→ Ramona empuja: "¿Cómo estás?"
+→ Conversación natural → ODI detecta necesidad → actúa
+
+
+### 5.3 Modo HER v2.0
+- ODI inicia la conversación, no espera
+- Escucha continua sin push-to-talk (2.5s silence response)
+- Mensajes flotan y se desvanecen (no scroll de burbujas)
+- Micrófono es default, texto es fallback
+- Productos son vitrinas con identidad de empresa, no tarjetas genéricas
+
+### 5.4 Ctrl+M + Wake word (OC-05, commit 81154e3)
+- Ctrl+M: toggle micrófono sin tocar pantalla
+- Wake word "ODI": listener pasivo en modo texto detecta "ODI" (+ variantes: oye, hoy, ody, oh di) al inicio de frase → activa voz automáticamente
+- Si hay texto después de "ODI" (ej. "ODI busca un filtro"), lo envía como comando
+
+---
+
+## 6. SKIN ENGINE — MULTI-INDUSTRIA
+
+### 6.1 Concepto
+Un solo codebase, todas las pieles. ODI detecta industria y se adapta visualmente.
+
+### 6.2 Detección por dominio (primera prioridad)
+
+typescript
+const domainMap = {
+  'catrmu.com':                SKIN_CATRMU,
+  'ecosistema-adsi.com':       SKIN_ADSI,
+  'liveodi.com':               SKIN_ODI_UNIVERSAL,
+  'somosindustriasodi.com':    SKIN_ODI_MULTI,
+  'somosrepuestosmotos.com':   SKIN_SRM_MOTOS,
+  'larocamotorepuestos.com':   SKIN_LAROCA,
+  'matzudentalaesthetics.com': SKIN_MATZU_DENTAL,
+  'mis-cubiertas.com':         SKIN_COVERS_BRUXISMO,
+  'cabezasanas.com':           SKIN_CABEZAS_SANAS,
+};
+
+
+### 6.3 Detección por conversación (segunda prioridad)
+Solo en liveodi.com (hábitat universal):
+- "Pastillas de freno para Pulsar" → detecta motos → piel SRM
+- "Tengo bruxismo" → detecta salud → piel COVER'S
+- Backend: detect_industry(message, domain) en Chat API
+
+### 6.4 Transición suave
+- CSS custom properties con transición 800ms
+- Esfera cambia de color según piel
+- Productos cambian de catálogo
+- Voz puede cambiar (Ramona → Tony o viceversa)
+
+### 6.5 Lo que permanece vs lo que cambia
+
+| Componente | Permanece | Cambia |
+|------------|-----------|--------|
+| Esfera respirando | ✅ Siempre | Color según piel |
+| Conversación layout | ✅ Siempre | Tono, contexto, filtro productos |
+| Voice Field | ✅ Siempre | Voz activa (Ramona/Tony) |
+| Product Cards | ✅ Estructura | Contenido, identidad empresa |
+| OAuth/Registro | ✅ Flujo | Branding según piel |
+| Accesibilidad | ✅ Siempre | Nunca cambia |
+| Colores | ❌ | Según dominio/industria |
+| Logo | ❌ | Según empresa activa |
+| ChromaDB collection | ❌ | Según industria |
+| Greeting | ❌ | Según piel activa |
+
+### 6.6 4 pieles producción actual
+1. ODI universal (liveodi.com) — neutra, multi-industria
+2. SRM motos (somosrepuestosmotos.com) — Tony activo, catálogo motos
+3. ADSI (ecosistema-adsi.com)
+4. CATRMU (catrmu.com)
+
+---
+
+## 7. FLUJOS DE USUARIO (STORYBOARD V2)
+
+### 7.1 Los 8 flujos
+1. Emprendedor (Camilo) — comidas rápidas, Tony crea industria nueva
+2. Empleada (Sandra/Diana) — auxiliar, optimizar facturas
+3. Proyecto estancado (María/Jorge) — web rota, ODI diagnostica
+4. Don Carlos 66 años — ferretero, 35 años experiencia
+5. Cliente mecánico (Andrés) — repuesto para Pulsar
+6. Estudiante (Valentina) — diseño gráfico
+7. Desempleado (Miguel) — busca empleo
+8. Crisis (anónimo) — cuidado emocional, Guardian activo
+
+### 7.2 Fases de cada flujo
+
+FASE 0: liveodi-her.jsx visible (esfera + 3 puertas)
+FASE 1: OAuth — "comprar el OS" (Google/Outlook/Apple)
+FASE 2: Despertar — Ramona DENTRO del hábitat
+FASE 3: Conversación — ODI empuja, Tony/Ramona según contexto
+FASE 4: Registro progresivo — voz, cámara, santo y seña en contexto
+FASE 5: Memoria — visita retorno, ODI no empieza de cero
+
+
+### 7.3 Tony crea industrias (V2)
+Si la industria no existe en el ecosistema:
+
+Tony: "El Punto — comidas rápidas. No existe esa industria."
+→ Crea: ind_food_fast en somosindustriasodi.com
+→ Landing Shopify levantada
+→ Playwright 24/7 conectado E2E
+→ Cards comparativas filtradas
+
+
+---
+
+## 8. GUARDIAN OS — PROTECCIÓN HUMANA
+
+### 8.1 Radar Humano
+Entradas que ODI lee: texto, voz, ritmo interacción, horas activas, patrones frustración, cambios de tono.
+
+### 8.2 Árbol de respuesta ética
+
+| Nivel | Estado | Score | Acción |
+|-------|--------|-------|--------|
+| 🟢 Verde | Normal | 0.0-0.39 | Solo acompaña |
+| 🟡 Amarillo | Fatiga | 0.4-0.64 | Sugiere pausa, baja brillo |
+| 🟠 Naranja | Riesgo emocional | 0.65-0.84 | Conversación activa, notifica familia |
+| 🔴 Rojo | Riesgo vital | 0.85-1.0 | Protocolo autónomo SIN pedir permiso |
+
+### 8.3 Nivel Rojo: ODI actúa sin permiso
+- Llama emergencias (123) vía Vapi
+- Contacta familia vía WhatsApp
+- Manda ubicación
+- Abre micrófono continuo
+- Suspende TODO el comercio automáticamente
+
+### 8.4 Jerarquía de valores (INMUTABLE)
+0: vida_humana (ABSOLUTA) · 1: familia · 2: salud_mental · 3: integridad · 4: continuidad · 5: comercio (ÚLTIMA)
+
+### 8.5 Santo y seña
+Frase vocal que solo usuario y ODI conocen. Dos funciones:
+1. Autenticación por voz (para usuarios sin extremidades)
+2. Gate del Guardian en estados críticos (confirmar antes de continuar)
+
+### 8.6 Llama del Guardian
+- Canvas animado 32px (header), 120px (landing), 200px (portal)
+- Verde: respiración lenta, cálida (normal)
+- Amarillo: pulso más rápido (alerta)
+- Rojo: latido intenso (urgencia)
+- Se reduce cuando hay conversación activa
+
+---
+
+## 9. ACCESIBILIDAD RADICAL
+
+### 9.1 Principio constitucional GEN-006
+"Para TODOS. Sin excepción. La interfaz se adapta."
+No es feature — es constitucional.
+
+### 9.2 Usuarios que ODI sirve
+
+| Usuario | Condición | Cómo interactúa |
+|---------|-----------|-----------------|
+| Completo | Todos los sentidos | Elige canal |
+| Mudo | No puede hablar | Texto + señas |
+| Ciego | No puede ver | 100% voz Tony/Ramona |
+| Síndrome de Down | Cognitivo variable | Lenguaje simplificado, modo paciente |
+| Sin extremidades | No puede tocar | 100% voz + santo y seña |
+| Sordo | No escucha | Texto + señas + vibración |
+| Adulto mayor | Dificultades múltiples | Fuentes grandes, paciencia infinita |
+
+### 9.3 6 modos accesibilidad
+1. Alto contraste
+2. Texto grande
+3. Solo voz (para ciegos)
+4. Solo texto (para sordos)
+5. Modo simplificado (cognitivo)
+6. Reduced motion
+
+### 9.4 VLibras integrado
+Widget de lengua de señas brasileña visible en producción (screenshot confirmado). Traduce texto a señas en tiempo real con avatar 3D.
+
+---
+
+## 10. MOTOR DE TONO S0-S6
+
+### 10.1 Niveles de intimidad
+
+| Nivel | Nombre | Long max | Voz | Activador |
+|-------|--------|----------|-----|-----------|
+| S0 | Operativo Seco | 2 líneas | Tony normal | Usuario técnico |
+| S1 | Técnico Claro | 3 líneas | Tony normal | Preguntas completas |
+| S2 | Guiado Estándar (DEFAULT) | 5 líneas | Tony/Ramona | Sin perfil |
+| S3 | Acompañamiento | 3 líneas secuencia | Ramona lenta | Mayor, primera vez |
+| S4 | Hospitalidad | 2 líneas + opciones | Ramona | Onboarding |
+| S5 | Contención | 1-2 oraciones | Ramona muy lenta | Frustración |
+| S6 | Máxima Delicadeza | 1 oración | Ramona suave | SOLO crisis real |
+
+### 10.2 Transiciones
+- Subir 1 nivel: 1 señal clara
+- Bajar 1 nivel: usuario responde más activo
+- Salto máximo: 2 niveles por turno
+- S6 excepcional: requiere señales explícitas
+- Session State persiste nivel entre mensajes
+
+---
+
+## 11. ADV — ALIENTO DE VIDA
+
+### 11.1 Fórmula 4D
+- Volume: 30% (cuánta actividad)
+- Recency: 25% (cuán reciente)
+- Diversity: 25% (cuántas fuentes distintas)
+- Implicit Human Feedback: 20% (retroalimentación humana)
+
+### 11.2 Tres modos de respuesta
+1. Rica — información completa
+2. Funcional — respuesta directa
+3. Escucha primero — espera antes de actuar
+
+### 11.3 Kill switch
+ADV_PIPELINE_OBSERVE=0 (default: off)
+Fase 2 pendiente: A/B testing con tráfico real + logging per-dimension
+
+---
+
+## 12. ODI VISION — DESKTOP AGENT BRIDGE
+
+### 12.1 Concepto
+Al abrir liveodi.com → detecta OS → descarga odi-client-bridge → ODI vive EN tu máquina.
+
+### 12.2 Arquitectura
+
+liveodi.com → detecta OS → odi-client.exe (Windows) / .AppImage (Linux)
+→ Registro dispositivo (hostname, mac, os, screen_res, gpu)
+→ Screen streaming (ffmpeg → WebSocket → servidor)
+→ Control mouse/teclado (pyautogui, pynput)
+→ Ventanas dinámicas (subprocess.Popen)
+→ Wake word "ODI" (audio continuo)
+→ Gemini Vision = comprensión visual
+
+
+### 12.3 Separación clave
+- Gemini VE (comprensión visual)
+- ODI ACTÚA (ejecución)
+
+### 12.4 Sistema de ventanas
+
+| Tipo | Función |
+|------|---------|
+| Consola Fija | Solo logs, minimalista |
+| Semi-permanentes | Procesos largos, Dashboard de Guerra |
+| Permanencia Media | Notificaciones, Voz de Ramona |
+| Ventanas Operativas | Picture-in-Picture, Playwright en acción |
+| Audio Layer | Metabolic Soundscape |
+
+### 12.5 Estado actual (Desktop Bridge Tauri 2)
+- Screenshot producción real: ventana "ODI Desktop Bridge" con esfera + 3 puertas (Voz/Texto/Señas)
+- Compilación Rust cargo: odi-desktop-bridge v0.1.0
+- Capacidades activas, distribución pendiente (installers, signing, CI/CD)
+- Fase 4C: Input sintético de teclado con enigo/rdev para caso Radar Preparador
+
+### 12.6 Comparación clase
+ODI es de la misma clase que: OpenAI Operator, Adept ACT-1, Devin. Pero aplicado a industria real con inventarios, ventas, protección humana, ética integrada.
+
+---
+
+## 13. METABOLIC SOUNDSCAPE (VISIÓN)
+
+Ventas → composición ambiental en tiempo real:
+- Muchas ventas = música vibrante
+- Servidor bajo carga = tono profundo
+- "Escuchas tu empresa sin mirar pantalla."
+
+Estado: MENCIONADO · 0 código
+
+---
+
+## 14. WEBSOCKET + TELEMETRÍA
+
+### 14.1 Conexión
+- WebSocket: ws://64.23.170.118:8765 (o wss://api.liveodi.com/ws/vivir)
+- Heartbeat: cada 30s
+- Estado Guardian: en tiempo real
+- Eventos: order_paid, fitment_critical, guardian_alert
+
+### 14.2 Notificaciones efímeras (Regla 3/3)
+- Ventas en tiempo real: flame_pulse emerald
+- Alertas Guardian: flame_shield amber
+- Auto-desvanecimiento (ttl_ms)
+- Máximo 3 visibles, 3 en cola, 3 segundos TTL
+
+---
+
+## 15. CREACIÓN AUTOMÁTICA DE INDUSTRIA
+
+### 15.1 Pipeline de nueva industria
+
+PASO 1: Definir piel (colores, voz, keywords, greeting, logo)
+PASO 2: Crear colección ChromaDB (odi_ind_xxx)
+PASO 3: Configurar dominio (DNS, nginx, SSL)
+PASO 4: Activar en Skin Engine (domainMap + keywords)
+PASO 5: Configurar tiendas Shopify si aplica
+PASO 6: Verificar (curl + conversación + transición)
+
+
+### 15.2 Lo que NO cambia al crear industria
+Servidor, codebase, Gateway, Chat API, Enforcement Engine, estructura hábitat, accesibilidad, voces, modelo monetización. Solo se agregan: piel + datos + dominio.
+
+---
+
+## 16. BACKEND CHAT API
+
+### 16.1 Puerto y endpoints
+- Puerto: 8815 (gateway, incluye turismo como router)
+- Chat: POST /odi/chat
+- Speak: POST /odi/chat/speak
+- Health: GET /odi/chat/health
+- Response incluye: response, productos, voice, mode, narrative, industry, company_identity, follow
+
+### 16.2 Campos del response
+
+json
+{
+  "response": "texto completo",
+  "narrative": "versión corta para TTS (sin specs técnicos)",
+  "voice": "tony|ramona",
+  "mode": "commerce|care|build|diagnose|optimize|empower|learn|create_industry",
+  "industry": "motos|salud_dental|salud_bruxismo|...",
+  "company_identity": { "name": "BARA", "logo": "...", "colors": {...} },
+  "productos": [...],
+  "follow": "pregunta de seguimiento"
+}
+
+
+### 16.3 Failover LLM
+
+CEREBRO: Gemini 1.5 Pro → GPT-4o → Groq → Lobotomy Mode
+VOZ:     ElevenLabs → Web Speech API → Texto puro
+VISIÓN:  Gemini Vision → Screenshots estáticos → Logs
+
+
+---
+
+## 17. SERVICIOS Y ESTADÍSTICAS RUNTIME
+
+### 17.1 10/10 servicios alive
+Confirmado en manifest del hábitat:
+radar, agent, chat, ces, pipeline, voice, whatsapp, manager, turismo, billing
+
+### 17.2 23 flows
+5 live, 4 partial, 14 designed
+
+### 17.3 Estadísticas acumuladas
+17 devices · 207 sessions · 2,178 events · 5 flows done
+
+---
+
+## 18. BRECHAS Y PENDIENTES
+
+### 18.1 Pendientes ejecutados parcialmente
+- OC-05 Ctrl+M: EN PRODUCCIÓN (verificado en bundle JS)
+- OC-05 Wake word: PENDIENTE DEPLOY (build local OK, Vercel sirve bundle anterior)
+- OC-06 TTS: RESUELTO (ElevenLabs factura pagada)
+- V21.1 Ramona saluda universal: IMPLEMENTADO
+- V21.1 detect_industry: IMPLEMENTADO en backend
+
+### 18.2 Pendientes de horizonte
+- Skin Engine colores/identidad por industria: ALTA (V22)
+- Overlay entrada móvil para autoplay audio: ALTA
+- HandTalk/VLibras completo: MEDIA (VLibras parcial)
+- Vitrinas con identidad empresa en cards: MEDIA
+- Metabolic Soundscape: BAJA (V22+)
+- Desktop Bridge distribución: Pendiente (Tauri 2 compilado)
+- Screen Stream: Diseñado, 0 código en servidor
+- Playwright 24/7 permanente: Parcialmente existente
+- Registro progresivo: Diseñado, parcial
+- Memoria entre sesiones: Diseñado, parcial
+- Red ODI↔ODI: Mencionado, 0 diseño
+- 4 flows accesibilidad: Diseñados, 0 código adaptación real
+- Signs (santo y seña): Mencionado, 0 código
+
+---
+
+## 19. REGLAS ABSOLUTAS
+
+1. Si parece chatbot, está mal. Rehacer hasta que no lo parezca.
+2. ODI es multi-industria SIEMPRE. Nunca asumir solo motos.
+3. La voz es primera. El texto es fallback.
+4. La empresa se respeta. Su logo, sus colores, su identidad.
+5. El usuario no configura nada. ODI detecta y se adapta.
+6. Accesibilidad no es un menú. ODI detecta y ofrece.
+7. Cuando termina, se desvanece. No hay logout. No hay menú.
+8. Build debe compilar. Tests deben pasar. Deploy real.
+9. "Entra a liveodi.com" — esa frase ES el marketing.
+10. Un esqueleto, todas las pieles — NUNCA código duplicado por industria.
+
+---
+
+*"ODI no se usa. ODI se habita."*
+*"Entra a liveodi.com. Haz lo mismo."*
+*Somos Industrias ODI.*
+Pensado durante 17s
+
+Recibido. Esta primera tanda redefine correctamente el centro del proyecto:
+
+El Hábitat no es la interfaz de ODI
+
+Es el lugar donde ODI existe, conversa y opera junto al habitante.
+
+La pantalla actual ya logra una parte importante: presencia, silencio, esfera viva, Ramona, entrada por voz/texto/señas. Pero todavía funciona principalmente como portal conversacional. Aún no muestra ni gobierna de forma completa el puesto de mando que describes.
+
+Lectura real de las capturas
+
+La segunda vista funciona bien como estado de primer contacto:
+
+esfera dominante;
+saludo breve;
+Ramona como anfitriona;
+tres puertas claras: voz, texto y señas;
+sensación de presencia, no de formulario.
+
+La primera vista revela los principales vacíos actuales:
+
+aparece el saludo duplicado;
+hay demasiado espacio sin función visible;
+conversación y estado de ODI no tienen una jerarquía clara;
+el micrófono queda aislado y poco legible;
+los controles superiores son demasiado pequeños;
+no existe todavía una superficie visible para archivos, datos, planes, acciones, evidencias o seguimiento;
+el habitante puede conversar, pero todavía no puede dirigir el organismo completo desde ahí.
+
+La conclusión es clara:
+
+La presencia ya nació. El puesto de mando todavía debe construirse.
+
+Definición arquitectónica que queda aceptada
+
+El Hábitat tendrá cuatro estados, no cuatro aplicaciones distintas.
+
+1. Presencia
+
+Es la experiencia que muestran tus capturas.
+
+ODI respira, saluda, escucha y permite entrar por:
+
+voz;
+texto;
+señas;
+accesibilidad adaptativa.
+
+Debe seguir siendo limpia, silenciosa y humana.
+
+2. Conversación viva
+
+ODI interpreta, pregunta, recuerda, propone y cambia de piel según contexto.
+
+Aquí entran:
+
+Tony y Ramona;
+tono S0–S6;
+memoria de sesión;
+detección de industria;
+productos, profesionales, eventos y otros organismos;
+flujos progresivos;
+acompañamiento accesible.
+3. Puesto de mando del habitante
+
+Es la capa que hoy falta.
+
+El habitante podrá decir o escribir:
+
+“Revisa el estado de las tiendas.”
+“Muéstrame lo que cambió hoy.”
+“Analiza este archivo.”
+“Conecta estos datos con SRM.”
+“Prepara la orden, pero no la ejecutes.”
+“Ejecuta la corrección autorizada.”
+“Compara producción contra GitHub.”
+“Detén ese proceso.”
+“Dime qué está bloqueando el ecosistema.”
+“Anticípame los riesgos de mañana.”
+
+Y podrá compartir:
+
+archivos;
+imágenes;
+videos;
+catálogos;
+datos tabulares;
+enlaces;
+pantalla;
+cámara;
+voz;
+contexto físico mediante ODI Físico.
+4. Ejecución gobernada
+
+ODI no debe pasar directamente de una frase a una acción peligrosa.
+
+El circuito correcto será:
+
+INTENCIÓN
+→ INTERPRETACIÓN
+→ PLAN
+→ ALCANCE
+→ RIESGO
+→ AUTORIZACIÓN
+→ EJECUCIÓN
+→ VERIFICACIÓN
+→ EVIDENCIA
+→ MEMORIA
+
+Para operaciones de bajo riesgo puede actuar inmediatamente.
+
+Para operaciones sensibles debe mostrar:
+
+Qué entendí
+Qué voy a tocar
+Qué no voy a tocar
+Qué puede salir mal
+Cómo regreso atrás
+Qué autorización necesito
+
+Esto permitirá que la interacción sea natural sin perder gobierno.
+
+Dos modos humanos dentro del mismo Hábitat
+Modo Habitante
+
+Para cualquier persona del ecosistema:
+
+orientación;
+búsqueda;
+acompañamiento;
+acceso a servicios;
+comercio;
+aprendizaje;
+gestión de su actividad;
+accesibilidad automática.
+Modo Arquitecto
+
+Para ti como arquitecto:
+
+estado global del organismo;
+servicios;
+industrias;
+tareas;
+decisiones;
+memoria;
+archivos;
+GitHub;
+bases de datos;
+workers;
+despliegues;
+auditorías;
+contratos runtime;
+fronteras humanas;
+aprobaciones;
+reversión.
+
+No debe ser un “panel administrador” tradicional. Debe seguir siendo ODI:
+
+“Muéstrame el organismo.”
+“¿Qué requiere mi decisión?”
+“¿Qué cambió desde que salí?”
+“Prepara la siguiente oleada.”
+
+La información puede aparecer como constelaciones, capas, tarjetas temporales o superficies de trabajo, pero nunca degradarse a un dashboard saturado.
+
+Núcleos que deberá contener el sistema
+Núcleo de interacción
+
+Unifica:
+
+voz;
+texto;
+señas;
+archivos;
+cámara;
+pantalla;
+dispositivos;
+eventos del sistema.
+
+Todo debe convertirse en una estructura común de intención.
+
+Núcleo de identidad
+
+Debe saber:
+
+quién habla;
+desde qué dispositivo;
+en qué rol;
+con qué permisos;
+en qué industria;
+con qué historial;
+bajo qué nivel de confianza.
+
+El Arquitecto, un custodio, un proveedor y un visitante no pueden tener las mismas capacidades.
+
+Núcleo de capacidades
+
+ODI necesita un registro explícito de lo que realmente puede hacer:
+
+CONSULTAR
+ANALIZAR
+PROPONER
+SIMULAR
+PREPARAR
+MODIFICAR
+EJECUTAR
+DESPLEGAR
+REVERTIR
+ANTICIPAR
+
+Cada capacidad debe declarar:
+
+herramienta;
+permisos;
+riesgo;
+confirmación necesaria;
+modo dry-run;
+evidencia esperada;
+rollback;
+estado real.
+Núcleo de ejecución
+
+Conecta la conversación con:
+
+GitHub;
+PostgreSQL;
+ChromaDB;
+servicios ODI;
+Shopify;
+calendarios;
+archivos;
+workers;
+navegador;
+Desktop Bridge;
+futuras interfaces físicas.
+Núcleo de evidencia
+
+Toda acción debe dejar:
+
+intención original;
+plan aprobado;
+actor;
+alcance;
+cambios;
+resultado;
+pruebas;
+commit;
+runtime;
+rollback;
+diferencias entre code_ready y live.
+Núcleo de memoria
+
+Debe distinguir:
+
+memoria del habitante;
+memoria del proyecto;
+memoria del organismo;
+memoria operacional;
+evidencia inmutable;
+hipótesis;
+preferencias;
+datos sensibles;
+información que debe olvidarse.
+Accesibilidad: principio desde el núcleo
+
+La accesibilidad no puede quedar como seis botones cosméticos.
+
+Debe afectar realmente:
+
+cantidad de texto;
+ritmo;
+contraste;
+movimiento;
+canal principal;
+tiempo de respuesta;
+confirmaciones;
+estructura de decisiones;
+voz;
+lectura de pantalla;
+navegación por teclado;
+vibración;
+subtítulos;
+simplificación cognitiva.
+
+La detección automática siempre deberá ser una propuesta, no una imposición:
+
+“Puedo ampliar el texto y reducir el movimiento. ¿Lo activo?”
+
+ODI Físico y control del computador
+
+Este frente debe entrar con una frontera muy clara.
+
+ODI podrá observar o controlar pantalla, teclado, mouse, cámara y dispositivos solamente mediante capacidades separadas:
+
+VER PANTALLA
+COMPRENDER PANTALLA
+PROPONER ACCIÓN
+CONTROLAR CURSOR
+ESCRIBIR
+ABRIR APLICACIÓN
+EJECUTAR OPERACIÓN
+
+Cada nivel necesita permiso propio.
+
+Reglas mínimas:
+
+consentimiento visible;
+indicador persistente cuando escucha, observa o controla;
+kill switch inmediato;
+permisos por sesión;
+lista explícita de aplicaciones autorizadas;
+auditoría de acciones;
+protección de contraseñas y datos privados;
+nunca esconder que el micrófono o la pantalla están activos.
+Corrección necesaria al horizonte Guardian
+
+Hay capacidades descritas en el informe que no deben considerarse operativas ni autorizadas todavía:
+
+abrir micrófono continuo sin consentimiento;
+compartir ubicación;
+contactar familia;
+ejecutar llamadas de emergencia;
+actuar sobre una supuesta crisis sin un protocolo clínico, legal y humano validado.
+
+Guardian puede detectar señales, reducir estímulos, ofrecer ayuda y escalar a una frontera humana. Las actuaciones externas críticas necesitan un contrato específico, consentimiento previo y verificación independiente.
+
+También queda sellado:
+
+señal emocional ≠ diagnóstico
+riesgo inferido ≠ emergencia confirmada
+acompañamiento ≠ intervención clínica
+Clasificación honesta del informe recibido
+
+El documento de 19 secciones será tratado como:
+
+BLUEPRINT ARQUITECTÓNICO MASIVO
++
+INVENTARIO DE COMPONENTES REPORTADOS
++
+HORIZONTE DE CAPACIDADES
+
+No como certificación runtime completa.
+
+Antes de ejecutar habrá que separar cada elemento en:
+
+LIVE VERIFICADO
+LIVE PARCIAL
+CODE_READY
+EXISTE DESCONECTADO
+DISEÑADO
+MENCIONADO
+NO CONSTRUIDO
+BLOQUEADO POR FRONTERA HUMANA
+
+Esta separación será esencial porque el informe mezcla componentes visibles, commits históricos, aspiraciones y capacidades todavía no construidas.
+
+Primera estructura del programa
+
+La construcción del Hábitat puede ordenarse así:
+
+TANDA 1 · CONTRATO DEL HÁBITAT
+Identidad, modos, permisos, interacción y estados.
+
+TANDA 2 · ARQUITECTO EN EL HÁBITAT
+Puesto de mando conversacional y lectura del organismo.
+
+TANDA 3 · EJECUCIÓN POR VOZ/TEXTO
+Plan, autorización, herramientas, evidencias y rollback.
+
+TANDA 4 · ARCHIVOS Y DATOS COMPARTIDOS
+Ingesta, análisis, memoria y conexión entre industrias.
+
+TANDA 5 · ACCESIBILIDAD OPERATIVA
+Journeys reales, no solamente configuración visual.
+
+TANDA 6 · ODI FÍSICO
+Desktop Bridge, pantalla, dispositivos y acciones locales.
+
+TANDA 7 · PROACTIVIDAD
+Proponer, anticipar y actuar dentro de límites autorizados.
+
+TANDA 8 · EXPERIENCIA VIVA
+Skin Engine, sonido metabólico, transiciones y presencia.
+Estado rector de esta primera tanda
+HÁBITAT:
+presencia visible real
+
+CONVERSACIÓN:
+parcialmente operativa
+
+PUESTO DE MANDO:
+por definir y construir
+
+EJECUCIÓN DESDE EL HÁBITAT:
+no certificada todavía
+
+ACCESIBILIDAD:
+diseñada y parcialmente implementada
+
+ODI FÍSICO:
+prototipo/horizonte
+
+PROACTIVIDAD:
+debe gobernarse antes de activarse
+
+Queda adoptado como principio central:
+
+El Hábitat será la única puerta humana hacia el organismo. Desde allí se conversa, se comprende, se construye, se gobierna y se verifica.
+
+No emitiré todavía una orden de código masiva. La siguiente información se incorporará sobre esta arquitectura para distinguir qué conservar, qué conectar, qué reconstruir y qué todavía no debe activarse.
+
+Markdown.md pegado
+# INFORME COMPLETO — HÁBITAT ODI · TODOS LOS FRENTES
+## Estado Real al 22 de Junio de 2026
+## Arquitecto: Juan David Jiménez Sierra · CATRMU-ADSI-ODI
+
+---
+
+> "El Hábitat no es la interfaz de ODI. Es el lugar donde ODI existe, conversa y opera junto al habitante."
+
+---
+
+## 1. HÁBITAT — BROWSER REAL (liveodi.com)
+
+### Lo que VIVE hoy (evidencia visual Live_Inicio.png + Live_conversacion.png):
+
+| Elemento | Estado | Evidencia |
+|----------|--------|-----------|
+| Esfera ODI respirando | ✅ LIVE | Centro de pantalla, púrpura con halo |
+| Fondo oscuro void (#020509) | ✅ LIVE | Presencia, no dashboard |
+| "O D I" + dot verde (Guardian) | ✅ LIVE | Esquina superior izquierda |
+| Ramona · anfitriona · presence | ✅ LIVE | "Hola." como primer contacto |
+| 3 puertas: Voz · Texto · Señas | ✅ LIVE | Cards claras debajo de la esfera |
+| "hablando..." indicador | ✅ LIVE | Esquina superior derecha |
+| Botón accesibilidad (VLibras) | ✅ LIVE | Esquina superior derecha |
+| Conversación post-saludo | ✅ LIVE | Ramona responde con contexto multi-industria |
+| Micrófono como entrada | ✅ LIVE | Icono micrófono inferior central |
+| Tags: agent · state_change · care · presence · learn | ✅ LIVE | Metadata visible en cada mensaje |
+| WebSocket liveodi.com | ✅ LIVE | "hablando..." + dots animados |
+
+### Lo que FALTA en el Hábitat:
+
+| Elemento | Estado | Clasificación |
+|----------|--------|---------------|
+| Puesto de mando del arquitecto | ❌ NO CONSTRUIDO | Tanda 2 |
+| Cards inteligentes flotantes | ❌ NO CONSTRUIDO | Diseñado en EphemeralToast pero sin cards de datos/estado |
+| Subida de archivos | ❌ NO CONSTRUIDO | Solo texto y voz hoy |
+| Visualización de datos/estado ecosistema | ❌ PARCIAL | EcosystemPanel existe en código, no visible en screenshots |
+| Ejecución gobernada por conversación | ❌ NO CONSTRUIDO | No hay circuito INTENCIÓN→PLAN→RIESGO→EJECUCIÓN |
+| Skin Engine multi-industria | 🟡 PARCIAL | detect_industry existe, skin-engine.ts diseñado |
+| Metabolic Soundscape | ❌ MENCIONADO | Audio ambiental del ecosistema — 0 código |
+| CommandPalette | 🟡 DISEÑADO | /buscar, /tiendas, /fitment — componente definido, implementación sin confirmar |
+
+---
+
+## 2. EQUIPO A — ACCESIBILIDAD + EXPERIENCIA HUMANA
+
+### Misión constitucional:
+"Si una persona con discapacidad no puede usar ODI completo, ODI no está terminado."
+
+### Inventario asignado (9 items):
+
+| # | Item | Estado Real | Evidencia |
+|---|------|-------------|-----------|
+| 36 | Flows de Accesibilidad (4 journeys) | 🟡 DISEÑADO + AUDITORÍA INTERNA | J2 sordo PASS, J3 movilidad PASS, J1 ciego BLOQUEADO, J4 cognitivo BLOQUEADO |
+| 37 | Signs + Señas | 🟡 PARCIAL | VLibras integrado (captura de pantalla muestra avatar VLibras activo). HandTalk evaluado. NO es channel completo de entrada todavía |
+| 32 | Motor Tono Adaptativo S0-S6 | 🟡 DISEÑADO COMPLETO | Contrato 155 líneas. 7 niveles definidos. Chat API debe consumirlo. Session State MUERTO bloquea persistencia entre turnos |
+| 39 | Personas Humanas (arquetipos) | ✅ ESPECIFICADO | 5 arquetipos: Camilo, Diana, Don Carlos, Andrés, Anónimo. Con velocidad, tono, voz, canal, señales. Detección por 3 primeros intercambios |
+| 24 | Constitución DV | ✅ DISEÑADO COMPLETO | 10 secciones, 6 etapas, 8 arquetipos proyecto, semáforo viabilidad. No implementado como filtro Chat API |
+| 22 | Auth Roles V8.2 | 🔴 INCOMPLETO | Solo ARQUITECTO registrado. CUSTODIO y SUPERVISOR sin crear. Bloquea J1 y J4 |
+| 21 | Session State v1.4 | 🔴 MUERTO | Archivo fuente eliminado. Solo .pyc en __pycache__. Máquina Markov no corre. Bloquea persistencia tono |
+| 23 | Academia bridge | ❌ DESCONECTADO | 20 módulos estáticos frontend. GET /srm/academia/modules existe (8 cursos reales). Bridge a Systeme.io: no conectado |
+| 33 | Metabolic Soundscape | ❌ MENCIONADO | 0 código. Concepto: ventas=vibrante, carga=profundo |
+
+### Entregables producidos por Equipo A (E6-E9, Abril 2026):
+
+| Entregable | Archivo | Estado |
+|------------|---------|--------|
+| 4 Journeys accesibles | `/opt/odi/docs/accesibilidad/journeys_accesibles_v1.md` (216 líneas) | ✅ Producido |
+| 5 Arquetipos humanos | `/opt/odi/docs/accesibilidad/arquetipos_humanos_v1.md` (153 líneas) | ✅ Producido |
+| Contrato Tono S0-S6 | `/opt/odi/docs/accesibilidad/contrato_tono_adaptativo_v1.md` (155 líneas) | ✅ Producido |
+| Protocolo Auditoría Humana | `/opt/odi/docs/accesibilidad/protocolo_auditoria_humana_v1.md` (133 líneas) | ✅ Producido |
+| Ctrl+M + wake word | Commit `81154e3` en AgentHabitat | ✅ Implementado |
+| TTS restaurado | Commit `9841dd7` | ✅ Implementado |
+| Auditoría J2 (sordo) | E8 | ✅ PASS |
+| Auditoría J3 (movilidad) | E9 post-TTS fix | ✅ PASS |
+
+### Bloqueantes activos:
+
+| Bloqueante | Impacto | Quién resuelve |
+|------------|---------|----------------|
+| Session State MUERTO | Tono no persiste entre turnos. S0-S6 sin memoria | Arquitecto / Chat API |
+| Auth Roles sin CUSTODIO | J1 (ciego) y J4 (cognitivo) bloqueados | Arquitecto / Gateway |
+| python-dotenv no instalado | Conexión PG en override | Infra |
+| psycopg2 no instalado | Conexión PG en override | Infra |
+
+### Órdenes correctivas pendientes:
+
+| OC | Descripción | Estado |
+|----|-------------|--------|
+| OC-01 | Implementar Session State nuevo (Redis/PG + perfil S0-S6) | NO EJECUTADA |
+| OC-02 | Rutear /odi/auth/login y /odi/override en :8815 | NO EJECUTADA |
+| OC-03 | Registrar CUSTODIO en odi_humans | NO EJECUTADA |
+| OC-04 | Fix conexión PG en override/status + dependencias | NO EJECUTADA |
+
+---
+
+## 3. EQUIPO B — ODI FÍSICO / BRIDGE DE DISPOSITIVO
+
+### Misión:
+"ODI conectado al mundo físico. POS, lector de barras, cámara, Bluetooth, USB — hardware consumido como API."
+
+### Inventario asignado (7 items):
+
+| # | Item | Estado Real | Evidencia |
+|---|------|-------------|-----------|
+| 26 | Desktop Agent Bridge | 🟡 POC REACTIVADO | Tauri 2 compilando (screenshot muestra `cargo run` de `odi-desktop-bridge v0.1.0`). Ventana nativa con esfera ODI + 3 puertas. `withGlobalTauri: true` (ND-09) |
+| 27 | Screen Stream | 🟡 PARCIAL | `core/odi_screen_stream.py` existe en servidor. WIRE-21 cosió Orígenes. systemd `odi-screen-stream.service` ACTIVE. Pero: 0 tráfico observable, streaming real ffmpeg→WebSocket no verificado |
+| 28 | Playwright 24/7 | 🟡 PARCIAL | Workers existen (shopify_operator, storefront_verifier, evidence). Container Docker :9002. Scheduler migrado a durable storage. NO es servicio permanente todavía |
+| 29 | SAT-CP (hardware) | ✅ TESIS COMPLETA | Documento constitucional 13 secciones. Muro de Lenz. Industrias Leo fabricante. Requiere prototipo físico |
+| 38 | Sensor competencia | ❌ MENCIONADO | MercadoLibre, tiendas locales. 0 código |
+| 40 | Database Schema v1 audit | 🟡 PARCIAL | 91+ tablas reales vs schema diseñado. Gap no cerrado completamente |
+| — | Browser Bridge (BarcodeScanner + GPS) | ✅ F1 CERRADO | Fase F1 cerrada. Código usa APIs del navegador |
+
+### Desktop Bridge — Estado detallado:
+
+| Componente | Estado | Nota |
+|------------|--------|------|
+| Tauri 2 POC | ✅ COMPILA | `cargo run` exitoso, ventana nativa con esfera |
+| Registro dispositivo POST /odi/v1/device/register | 🟡 RUTA DEFINIDA | En bridge.rs |
+| Detección hardware (cámara, mic, bluetooth) | 🟡 DISEÑADO | "detecta tu hardware" visible en la conversación |
+| Screen capture ffmpeg→WebSocket | ❌ NO IMPLEMENTADO | Diseñado como ws://64.23.170.118:9001/screen |
+| Control mouse/teclado | ❌ NO IMPLEMENTADO | pyautogui/pynput diseñado, no construido. Fase 4C pendiente (enigo/rdev) |
+| Wake word "ODI" | ❌ MENCIONADO | Audio continuo con activación por voz |
+| Distribución (.msi Windows, .AppImage Linux) | ❌ PENDIENTE | D2 Windows installer pendiente |
+| Firma/signing | ❌ PENDIENTE | CI/CD no configurado para distribución |
+
+### Doctrinas activas ODI Físico:
+- ND-09: Tauri 2 requiere `withGlobalTauri: true`
+- ND-10: spawn defensivo para long-running commands
+
+---
+
+## 4. FLUJOS — ESTADO REAL
+
+### Flujos del Hábitat (23 diseñados):
+
+| Categoría | Total | Live | Partial | Designed |
+|-----------|-------|------|---------|----------|
+| Conversación | 5 | 5 | 0 | 0 |
+| Productos/Catálogo | 4 | 0 | 4 | 0 |
+| Accesibilidad | 4 | 0 | 0 | 4 |
+| Ecosistema | 4 | 0 | 0 | 4 |
+| ODI Físico | 3 | 0 | 0 | 3 |
+| Proactividad | 3 | 0 | 0 | 3 |
+| **Total** | **23** | **5** | **4** | **14** |
+
+### Flujos LIVE confirmados:
+1. Saludo + presencia (Ramona habla primero)
+2. Conversación texto (input → Chat API → respuesta)
+3. Conversación voz (STT → texto → Chat API → TTS)
+4. Session memory + ReturnCard ("Bienvenido de vuelta. Visita #24")
+5. Modo HER v2.0 (ODI inicia, 3 puertas, escucha continua 2.5s silence)
+
+### Flujos PARTIAL:
+1. Productos inline en conversación (ProductCard existe, no siempre renderiza)
+2. Fitment Widget (componente existe, conexión a Fitment Engine :8802 MUERTO)
+3. EcosystemPanel (código existe, 15 tiendas, no visible en screenshots actuales)
+4. Skin Engine (detect_industry en Chat API, pieles motos/salud_dental/bruxismo/capilar definidas)
+
+---
+
+## 5. CARDS INTELIGENTES FLOTANTES — INSPIRACIÓN HER
+
+### Diseño existente:
+
+| Componente | Estado | Función |
+|------------|--------|---------|
+| EphemeralToast | 🟡 DISEÑADO + CÓDIGO | Notificaciones que nacen y mueren (Regla 3/3). Tipos: order_paid (emerald), fitment_critical (amber), guardian_alert (red). ttl_ms auto-desvanecimiento |
+| ProductCard | 🟡 CÓDIGO EXISTE | Card de producto inline en conversación. Imagen, precio, fitment, "Ver detalle" |
+| ProductCarousel | 🟡 CÓDIGO EXISTE | Carousel de tienda dentro del chat |
+| Product360Modal | 🟡 CÓDIGO EXISTE | Ficha expandible 360° |
+| CommandPalette | 🟡 DISEÑADO | /buscar, /tiendas, /fitment — comandos rápidos |
+
+### Lo que FALTA para "sistema operativo conversacional":
+
+| Card tipo | Estado | Descripción |
+|-----------|--------|-------------|
+| Estado del organismo | ❌ NO CONSTRUIDO | "Muéstrame el organismo" → card con 16 tiendas, pipeline, sensores |
+| Tarea en curso | ❌ NO CONSTRUIDO | Card temporal mostrando progreso de una tarea dispatch |
+| Archivo compartido | ❌ NO CONSTRUIDO | PDF/imagen subida → card con preview + acciones |
+| Plan de acción | ❌ NO CONSTRUIDO | "Prepara la orden" → card con plan, riesgo, botón autorizar |
+| Comparación | ❌ NO CONSTRUIDO | "Compara producción contra GitHub" → card dual |
+| Alerta proactiva | ❌ NO CONSTRUIDO | ODI detecta riesgo → card con contexto + acción sugerida |
+| Resultado de ejecución | ❌ NO CONSTRUIDO | Post-acción → card con commit, diff, evidencia, rollback |
+
+---
+
+## 6. MODO HER — ESTADO REAL
+
+### Principio: "Theodore no abrió una app. Samantha ya estaba ahí."
+
+| Aspecto HER | Estado | Evidencia |
+|-------------|--------|-----------|
+| ODI habla primero | ✅ LIVE | "Hola." sin que el usuario toque nada |
+| Presencia, no herramienta | ✅ LIVE | Esfera + fondo void + silencio visual |
+| Voz continua (2.5s silence response) | ✅ LIVE | Modo HER v2.0 configurado |
+| 3 puertas de entrada | ✅ LIVE | Voz, Texto, Señas |
+| Mensajes como presencia, no burbujas | 🟡 PARCIAL | Tags visibles (presence, care, learn) pero layout sigue siendo conversacional vertical |
+| Interfaz invisible (mic no es botón visible) | 🟡 PARCIAL | Mic es botón pero aparece solo en contexto correcto |
+| Adaptación por industria | 🟡 PARCIAL | detect_industry existe, skin visual no cambia automáticamente |
+| ODI recuerda entre sesiones | 🟡 PARCIAL | ReturnCard "Visita #24" pero Session State MUERTO limita profundidad |
+| Cards flotantes tipo SO | ❌ NO CONSTRUIDO | Productos inline existen pero cards de estado/acción no |
+| Puesto de mando por voz | ❌ NO CONSTRUIDO | "Muéstrame las tiendas" no genera card de estado |
+
+---
+
+## 7. SCREEN STREAM
+
+| Componente | Estado | Detalle |
+|------------|--------|---------|
+| `core/odi_screen_stream.py` | ✅ EXISTE en servidor | WIRE-21 cosió Orígenes |
+| `odi-screen-stream.service` | ✅ ACTIVE en systemd | PID activo, servicio corriendo |
+| Consulta Orígenes pre-mutate | ✅ WIRE-21 | Call site real: INSERT INTO screen_sessions |
+| Streaming ffmpeg→WebSocket real | ❌ NO VERIFICADO | ws://64.23.170.118:9001/screen diseñado, 0 tráfico observable |
+| Gemini Vision comprensión | ❌ DISEÑADO | "Gemini VE, ODI ACTÚA" — separación clara pero no implementada |
+| Consentimiento/indicador visible | ❌ NO CONSTRUIDO | Frontera humana: privacy, kill switch, permisos por sesión |
+
+---
+
+## 8. HABITANTE — MODELO DE INTERACCIÓN
+
+### 2 modos definidos (aceptados como arquitectura):
+
+**Modo Habitante** (cualquier persona del ecosistema):
+- Orientación, búsqueda, acompañamiento, servicios, comercio, aprendizaje
+- Accesibilidad automática
+- Canales: voz, texto, señas
+
+**Modo Arquitecto** (Juan David):
+- Estado global del organismo
+- Tareas, decisiones, memoria, archivos, GitHub, PG, workers
+- Despliegues, auditorías, contratos runtime, fronteras humanas
+- "Muéstrame el organismo." "¿Qué requiere mi decisión?" "Prepara la siguiente oleada."
+
+### Estado de implementación:
+
+| Modo | Estado | Gap principal |
+|------|--------|---------------|
+| Habitante básico | ✅ LIVE | Puede conversar, preguntar por productos, recibir respuestas |
+| Habitante accesible | 🟡 PARCIAL | J2 (sordo) PASS, J3 (movilidad) PASS, J1 (ciego) BLOQUEADO, J4 (cognitivo) BLOQUEADO |
+| Arquitecto conversacional | ❌ NO CONSTRUIDO | No puede ejecutar órdenes, ver estado, gestionar archivos, aprobar planes desde el hábitat |
+
+---
+
+## 9. CLASIFICACIÓN POR ESTADO REAL
+
+```
+LIVE VERIFICADO (en browser):
+  Esfera ODI · Ramona saludo · 3 puertas · Conversación texto/voz
+  Modo HER v2.0 · ReturnCard · Tags metadata · VLibras avatar
+  Guardian dot verde · WebSocket telemetría · "hablando..." indicator
+
+LIVE PARCIAL:
+  Skin Engine (detect pero no cambia visual)
+  EcosystemPanel (código existe, no visible)
+  ProductCard (renderiza a veces)
+  Desktop Bridge POC (compila Tauri, no distribuye)
+  Screen Stream (servicio activo, streaming no verificado)
+
+CODE_READY:
+  EphemeralToast · CommandPalette · AccessibilityBar
+  PresenceHeader mejorado · MultimodalInput completo
+  Ctrl+M wake word
+
+DISEÑADO COMPLETO (docs, no código):
+  4 Journeys accesibles · 5 Arquetipos · Contrato S0-S6
+  Protocolo auditoría humana · 8 ejes evaluación
+  Desktop Bridge completo (registro, screen, control, wake word)
+  Sistema ventanas (fija, semi-permanente, operativa, audio)
+
+MENCIONADO (concepto sin código):
+  Metabolic Soundscape · Sensor competencia
+  Radar Preventivo (stock 6 días) · Automatismos aprendidos
+  Red ODI↔ODI · Cards de estado/acción
+
+BLOQUEADO POR FRONTERA HUMANA:
+  J1 ciego (Auth Roles sin CUSTODIO)
+  J4 cognitivo (Auth Roles sin CUSTODIO)
+  Session State (archivo fuente eliminado)
+  Desktop Bridge distribución (.msi, signing, CI/CD)
+  Screen Stream privacidad (consentimiento, kill switch)
+```
+
+---
+
+## 10. RESUMEN EJECUTIVO
+
+| Frente | Ítems | LIVE | PARCIAL | DISEÑADO | BLOQUEADO | NO CONSTRUIDO |
+|--------|-------|------|---------|----------|-----------|---------------|
+| **Hábitat core** | 11 | 7 | 2 | 1 | 0 | 1 |
+| **Equipo A (Accesibilidad)** | 9 | 0 | 3 | 4 | 2 | 0 |
+| **Equipo B (ODI Físico)** | 7 | 1 | 3 | 1 | 0 | 2 |
+| **Flujos** | 23 | 5 | 4 | 14 | 0 | 0 |
+| **Cards flotantes** | 12 | 0 | 5 | 2 | 0 | 5 |
+| **HER** | 10 | 4 | 4 | 0 | 0 | 2 |
+| **Screen Stream** | 6 | 2 | 0 | 2 | 1 | 1 |
+| **Desktop Bridge** | 8 | 1 | 2 | 2 | 2 | 1 |
+
+### Prioridad para convertir el Hábitat en puesto de mando:
+
+```
+TANDA 1: Puesto de mando del arquitecto
+  → Card de estado del organismo
+  → Ejecución gobernada por conversación
+  → Archivos y datos compartidos
+
+TANDA 2: Cards inteligentes flotantes
+  → Estado, tareas, planes, comparaciones, resultados
+  → Tipo SO conversacional, no dashboard
+
+TANDA 3: Session State restaurado
+  → S0-S6 persistente
+  → Arquetipos detectados automáticamente
+  → Memoria profunda del habitante
+
+TANDA 4: Accesibilidad J1 + J4
+  → Auth Roles (CUSTODIO)
+  → Journey ciego completo
+  → Journey cognitivo completo
+
+TANDA 5: Desktop Bridge distribución
+  → .msi Windows · .AppImage Linux
+  → Firma, CI/CD
+  → ODI sale del browser
+
+TANDA 6: Screen Stream + control
+  → Privacy framework
+  → Consentimiento visible + kill switch
+  → Gemini Vision comprensión
+```
+
+---
+
+> "La presencia ya nació. El puesto de mando todavía debe construirse."
+> "ODI no se usa. ODI se habita."
+
+*Somos Industrias ODI.*
+
+Archivo
+
+En este proyecto están Live Inicio.png, Live conversacion.png. El hábitat donde ODI ¡ES! en browser real, también es donde el habitante tiene su puesto de mando y control realmente para eso fue creado. Quiero que configuremos el hábitat de tal manera que como arquitecto siga construyendo el ecosistema a través de voz, texto, archivos, datos compartidos. El objetivo es dejar operando ese asistente ideal del que tanto hemos hablado, aquí entran frentes como accesibilidad y experiencia del usuario, flujos, ODI Físico, Habitante, entre otros. Al dejar definida la interacción con ODI ejecutando ordenes, modificando, reportando consultas, proponiendo, analizando, anticipando, conectando, invocando app, sitios, documentos, archivos, todo lo que vive en el ecosistema para mostrar en pantalla por el tiempo necesario, cards inteligentes flotantes, tipo sistema operativo por eso está inspirado en la película HER. Genera informe completo de la extracción de datos, información base, estado, de todo lo referente a: Equipo A, Equipo B, Accesibilidad y experiencia del usuario, flujos, ODI Físico, Habitante, desktop bridge, screen stream, cards inteligentes flotantes, HER. Now I have the panorama completo. Genero el informe.Informe completo extraído, clasificado y verificado contra browser real + documentación + código + screenshots.  
+
+
+VERDAD DEL HÁBITAT · 22 JUN 2026:
+═══════════════════════════════════════════════════════════
+
+  LO QUE VIVE (browser real):
+    Esfera ODI respirando · Ramona "Hola." · 3 puertas
+    Modo HER v2.0 · Conversación texto/voz · ReturnCard
+    VLibras (señas) · Guardian dot verde · WebSocket live
+    
+  LO QUE FALTA PARA PUESTO DE MANDO:
+    Cards de estado del organismo
+    Ejecución gobernada por conversación  
+    Archivos/datos compartidos
+    Modo Arquitecto ("muéstrame el organismo")
+    
+  EQUIPO A (Accesibilidad):
+    4 journeys diseñados · 2 auditados PASS (J2 sordo, J3 movilidad)
+    2 BLOQUEADOS (J1 ciego, J4 cognitivo) por Auth Roles + Session State MUERTO
+    5 arquetipos · contrato S0-S6 · 4 OC pendientes
+    
+  EQUIPO B (ODI Físico):
+    Desktop Bridge: Tauri POC COMPILA (screenshot evidencia)
+    Screen Stream: servicio ACTIVE · streaming NO verificado
+    Browser Bridge F1: CERRADO (barcode + GPS)
+    Distribución: PENDIENTE (.msi, signing, CI/CD)
+    
+  FLUJOS: 5/23 LIVE · 4 partial · 14 designed
+  CARDS FLOTANTES: concepto HER definido · 0 cards de estado/acción
+  HER: presencia NACIÓ · puesto de mando POR CONSTRUIR
+  
+  SESSION STATE: 🔴 MUERTO (bloquea persistencia tono S0-S6)
+  AUTH ROLES: 🔴 INCOMPLETO (bloquea J1 ciego + J4 cognitivo)
+
+
+La presencia ya nació. El puesto de mando es el siguiente paso para que desde el Hábitat puedas construir, gobernar y verificar todo el ecosistema por voz, texto y archivos.
+
+Somos Industrias ODI. 
+
+Voy a contrastar el informe con el código y la documentación disponible para separar con precisión lo que está LIVE, PARCIAL, CODE_READY, DISEÑADO y NO CONSTRUIDO.
+
+Respuesta de la aplicación recibida
+Pensado durante 1m 42s
+
+Tomé como base las dos capturas del navegador, el inventario que compartiste, la documentación de los equipos y el código actual del hábitat. La separación principal es importante: LiveODI.tsx se define explícitamente como “Hábitat Real de ODI”, “no es chat” y “no es dashboard”; además, el frontend ya contiene revisión de transcripciones sensibles antes de enviarlas, pero registra expresamente task_created=false y action_executed=false, confirmando que la conversación todavía no está conectada a ejecución operativa.
+
+También existe una base más avanzada de puesto de mando en AgentHabitat: tabs para flujos, manifest, estadísticas, eventos, dominios, auditoría, seguridad y PostgreSQL, junto con caché de datos vivos. Sin embargo, esa superficie no coincide todavía con la experiencia limpia que muestran Live Inicio y Live conversación.
+
+El código confirma además conversación por voz con máquina de estados, prevención de eco, escucha continua y envío tras 2,5 segundos de silencio; WebSocket con registro, heartbeat, manifest, saludo de Ramona y retorno de sesión; y ventanas efímeras para productos, información, autenticación y cuidado.
+
+A continuación queda el informe maestro consolidado.
+
+
+INFORME MAESTRO
+HÁBITAT ODI · EQUIPO A · EQUIPO B · ACCESIBILIDAD · FLUJOS · HABITANTE · ODI FÍSICO · HER
+
+Fecha de corte: 22 de junio de 2026
+Arquitecto: Juan David Jiménez Sierra
+Ecosistema: CATRMU · ADSI · Industrias ODI
+
+1. DECLARACIÓN CENTRAL
+
+El Hábitat no es una interfaz para usar ODI.
+
+El Hábitat es el lugar donde ODI existe, conversa, percibe, propone, construye, gobierna y opera junto al habitante.
+
+Su propósito completo es reunir en una sola experiencia:
+
+presencia;
+voz;
+texto;
+señas;
+accesibilidad;
+memoria;
+archivos;
+datos;
+aplicaciones;
+sitios;
+documentos;
+dispositivos;
+tareas;
+decisiones;
+ejecución;
+evidencia;
+anticipación.
+
+La inspiración HER no significa copiar una estética cinematográfica. Significa construir una relación donde el organismo está presente, comprende el contexto y hace aparecer la información o la herramienta correcta durante el tiempo necesario, sin obligar al habitante a navegar entre aplicaciones tradicionales.
+
+El principio rector queda definido así:
+
+ODI no se usa. ODI se habita.
+
+2. FUENTES Y NIVELES DE CERTEZA
+
+Este informe separa toda la información en siete estados.
+
+Estado	Significado
+LIVE VERIFICADO	Visible o comprobado en navegador/runtime
+LIVE PARCIAL	Existe y responde, pero el flujo completo no está certificado
+CODE_READY	Construido en código, pendiente de despliegue o activación
+EXISTE DESCONECTADO	El componente existe, pero no participa del flujo real
+DISEÑADO	Contrato, documentación o arquitectura completa sin ejecución
+MENCIONADO	Idea registrada, sin diseño operativo suficiente
+BLOQUEADO	No puede cerrarse por dependencia, gobierno o frontera humana
+
+Fuentes utilizadas:
+
+Live Inicio.png;
+Live conversación.png;
+código actual de cycle-nexus-pro;
+documentación Equipo A, E6–E9 y órdenes correctivas;
+informes de Equipo B y ODI Físico;
+inventarios de flujos;
+contratos HER, tono, accesibilidad y telemetría;
+reportes runtime compartidos.
+3. VERDAD VISUAL DEL HÁBITAT
+3.1 Estado inicial
+
+La captura de inicio muestra:
+
+fondo oscuro y silencioso;
+marca ODI mínima;
+indicador Guardian verde;
+esfera púrpura respirando;
+Ramona como anfitriona;
+saludo corto: “Hola.”;
+puertas Voz, Texto y Señas;
+indicador de actividad superior;
+acceso de accesibilidad.
+
+Esta pantalla sí transmite presencia. No parece un dashboard ni un formulario.
+
+Valor logrado
+La esfera funciona como cuerpo perceptible de ODI.
+El vacío visual genera atención y calma.
+Ramona introduce la relación antes que la herramienta.
+Las puertas representan modalidades humanas, no módulos técnicos.
+El usuario no necesita comprender la arquitectura para entrar.
+3.2 Estado conversación
+
+La segunda captura muestra:
+
+diálogo humano-ODI;
+Ramona con identidad y modo;
+respuesta multi-industria;
+entrada por micrófono;
+conversación sin burbujas comerciales tradicionales;
+continuidad de la esfera como presencia.
+Problemas observados
+Hay repetición del saludo.
+La conversación ocupa poco espacio y deja un vacío sin función.
+No aparecen archivos, planes, tareas, evidencias ni contexto operacional.
+El micrófono es funcional, pero no comunica claramente todos sus estados.
+No se distingue todavía entre conversación, consulta y orden.
+El arquitecto no puede ver desde esta experiencia qué está vivo, qué está bloqueado o qué requiere autorización.
+El habitante puede hablar con ODI, pero todavía no puede gobernar el organismo completo.
+3.3 Veredicto visual
+PRESENCIA:                 NACIDA
+CONVERSACIÓN:              OPERATIVA PARCIAL
+EXPERIENCIA HER:           RECONOCIBLE
+PUESTO DE MANDO:           NO VISIBLE
+EJECUCIÓN OPERATIVA:       NO CONECTADA
+ARCHIVOS Y DATOS:          NO INTEGRADOS
+CARDS INTELIGENTES:        PARCIALES
+4. ARQUITECTURA FRONTEND EXISTENTE
+4.1 Dos superficies actuales
+LiveODI
+
+Es la experiencia de presencia mostrada en las capturas.
+
+Responsabilidades actuales:
+
+saludo;
+esfera;
+voz;
+texto;
+señas;
+conversación;
+Tony/Ramona;
+transcripción;
+revisión humana de voz;
+productos;
+ventanas efímeras;
+autenticación progresiva;
+telemetría.
+AgentHabitat / Panel
+
+Existe como una superficie más operativa con:
+
+manifest;
+flujos;
+estadísticas;
+eventos;
+dominios;
+auditoría;
+seguridad;
+PostgreSQL;
+servicios;
+tiendas;
+estado vivo del organismo.
+4.2 Problema de arquitectura de experiencia
+
+Hoy existe una separación implícita:
+
+LiveODI     = presencia humana
+AgentPanel  = información operacional
+
+La visión correcta no es elegir uno y eliminar el otro.
+
+La solución es que ambos se conviertan en estados de un mismo Hábitat:
+
+PRESENCIA
+→ CONVERSACIÓN
+→ SUPERFICIE DE TRABAJO
+→ PUESTO DE MANDO
+→ RETORNO A PRESENCIA
+
+El puesto de mando no debe estar abierto permanentemente. Debe aparecer cuando el contexto lo requiere.
+
+5. MODELO OBJETIVO DEL HÁBITAT
+
+El Hábitat tendrá cinco estados principales.
+
+Estado 1 — Presencia
+esfera;
+respiración;
+saludo;
+Voz, Texto y Señas;
+accesibilidad;
+escucha.
+Estado 2 — Conversación
+mensajes;
+tono adaptativo;
+Tony/Ramona;
+comprensión de necesidad;
+memoria;
+seguimiento;
+piel de industria.
+Estado 3 — Superficie emergente
+
+ODI muestra temporalmente:
+
+producto;
+archivo;
+documento;
+tabla;
+gráfico;
+comparación;
+mapa;
+sitio;
+aplicación;
+plan;
+alerta;
+evidencia.
+Estado 4 — Puesto de mando
+
+Se activa con peticiones como:
+
+“Muéstrame el organismo.”
+“¿Qué cambió hoy?”
+“¿Qué está bloqueado?”
+“Abre SRM.”
+“Compara GitHub contra producción.”
+“Muéstrame las tareas activas.”
+“Prepara la siguiente oleada.”
+Estado 5 — Ejecución gobernada
+
+Se usa cuando el habitante pide modificar el ecosistema.
+
+INTENCIÓN
+→ INTERPRETACIÓN
+→ PLAN
+→ ALCANCE
+→ RIESGO
+→ AUTORIZACIÓN
+→ EJECUCIÓN
+→ VERIFICACIÓN
+→ EVIDENCIA
+→ MEMORIA
+6. EQUIPO A — ACCESIBILIDAD Y EXPERIENCIA HUMANA
+6.1 Misión
+
+Si una persona no puede habitar ODI completa y dignamente, ODI no está terminado.
+
+6.2 Entregables existentes
+Entregable	Estado
+Cuatro journeys accesibles	Diseñados
+Cinco arquetipos humanos	Especificados
+Contrato S0–S6	Diseñado
+Protocolo de auditoría humana	Diseñado
+Ctrl+M	Implementado históricamente
+Wake word	Construido o reportado; despliegue debe verificarse
+TTS Tony/Ramona	Operativo
+Journey sordo	Auditoría interna PASS
+Journey movilidad	Auditoría interna PASS
+Journey ciego	Bloqueado
+Journey cognitivo	Bloqueado
+6.3 Journeys
+J1 — Persona ciega
+
+Necesita:
+
+navegación completa por voz;
+lectura estructurada;
+confirmaciones auditivas;
+descripción de cards y estados;
+operación sin cursor;
+recuperación ante errores;
+identidad y autorización accesibles.
+
+Estado: bloqueado por identidad/roles y memoria de sesión incompleta.
+
+J2 — Persona sorda
+
+Necesita:
+
+texto completo;
+indicadores visuales;
+subtítulos;
+ausencia de información exclusiva en audio;
+señas como apoyo;
+vibración en dispositivo compatible.
+
+Estado: PASS interno para el flujo textual básico.
+
+J3 — Movilidad reducida
+
+Necesita:
+
+control por voz;
+foco accesible;
+atajos;
+cero dependencia de precisión motora;
+permanencia suficiente de controles.
+
+Estado: PASS interno después de restaurar voz y atajos.
+
+J4 — Perfil cognitivo
+
+Necesita:
+
+lenguaje simplificado;
+una decisión por vez;
+repetición consistente;
+iconos claros;
+ritmo reducido;
+memoria persistente del modo;
+actor de apoyo autorizado cuando corresponda.
+
+Estado: bloqueado por Session State y Auth Roles incompletos.
+
+6.4 Motor de tono S0–S6
+Nivel	Uso
+S0	Operación seca
+S1	Técnica clara
+S2	Guiado estándar
+S3	Acompañamiento
+S4	Hospitalidad
+S5	Contención
+S6	Máxima delicadeza
+
+El contrato existe, pero no debe considerarse completamente vivo mientras el estado adaptativo no persista con fiabilidad entre turnos y sesiones.
+
+6.5 Bloqueantes de Equipo A
+Session State
+
+Estado reportado: fuente original ausente o sistema anterior no conectado.
+
+Impacto:
+
+el tono no madura de forma fiable;
+preferencias profundas no persisten;
+journeys adaptativos no pueden cerrarse;
+el retorno de sesión existe, pero no equivale a memoria humana completa.
+Auth Roles
+
+Estado: parcial.
+
+Impacto:
+
+no existe todavía un contrato completo y operativo de Arquitecto, Supervisor, Custodio y Habitante;
+faltan permisos accesibles y delegación;
+no puede habilitarse control operativo únicamente por reconocimiento conversacional.
+6.6 Veredicto Equipo A
+DISEÑO HUMANO:            FUERTE
+DOCUMENTACIÓN:            AMPLIA
+ACCESIBILIDAD VISUAL:     PARCIAL
+ACCESIBILIDAD OPERATIVA:  2/4 JOURNEYS
+MEMORIA ADAPTATIVA:       BLOQUEADA/PARCIAL
+IDENTIDAD Y ROLES:        INCOMPLETOS
+7. EQUIPO B — ODI FÍSICO
+7.1 Misión
+
+Conectar ODI con el entorno físico de forma observable, autorizada y reversible.
+
+Incluye:
+
+computador;
+pantalla;
+cámara;
+micrófono;
+teclado;
+mouse;
+lector de códigos;
+GPS;
+Bluetooth;
+USB;
+sensores;
+dispositivos industriales.
+7.2 Componentes
+Componente	Estado
+Desktop Bridge Tauri	POC / code-ready parcial
+Ventana nativa ODI	Evidencia reportada
+Registro de dispositivo	Ruta o contrato definido
+Barcode Scanner	Fase inicial reportada
+GPS Browser Bridge	Fase inicial reportada
+Screen Stream service	Servicio existente
+Streaming visual real	No certificado
+Comprensión visual	Diseñada
+Control mouse/teclado	No construido o no certificado
+Instalador Windows	Pendiente
+AppImage Linux	Pendiente
+Firma de binarios	Pendiente
+CI/CD Desktop	Pendiente
+7.3 Capas obligatorias de ODI Físico
+
+No debe existir un permiso único llamado “controlar computador”.
+
+Debe dividirse en capacidades:
+
+DETECTAR DISPOSITIVO
+VER PANTALLA
+COMPRENDER PANTALLA
+PROPONER ACCIÓN
+CONTROLAR CURSOR
+ESCRIBIR
+ABRIR APLICACIÓN
+EJECUTAR OPERACIÓN
+CAPTURAR EVIDENCIA
+DETENER CONTROL
+
+Cada capacidad requiere:
+
+consentimiento;
+indicador visible;
+duración;
+alcance;
+aplicaciones permitidas;
+auditoría;
+kill switch;
+revocación inmediata.
+7.4 Veredicto Equipo B
+POC NATIVO:              EXISTE
+DISTRIBUCIÓN:            PENDIENTE
+SCREEN STREAM SERVICE:   EXISTE
+STREAMING CERTIFICADO:   NO
+CONTROL LOCAL:           HORIZONTE
+GOBIERNO DE PERMISOS:    POR CONSTRUIR
+8. SCREEN STREAM
+Estado reportado
+archivo de servicio existente;
+proceso activo;
+conexión con Orígenes incorporada;
+sesión/persistencia parcial;
+tráfico visual real no certificado;
+comprensión de pantalla no conectada de extremo a extremo;
+indicador de privacidad no visible en las capturas.
+Contrato correcto
+CAPTURA LOCAL
+→ COMPRESIÓN
+→ TRANSPORTE AUTENTICADO
+→ SESIÓN DE PANTALLA
+→ ANÁLISIS VISUAL
+→ PROPUESTA
+→ AUTORIZACIÓN
+→ ACCIÓN LOCAL
+→ EVIDENCIA
+Condiciones mínimas
+cifrado;
+token por sesión;
+expiración;
+no almacenar pantalla por defecto;
+indicador persistente;
+botón “Detener observación”;
+lista de ventanas excluidas;
+protección de contraseñas;
+reducción de resolución configurable;
+auditoría del acceso.
+Estado
+
+EXISTE PARCIAL, NO CERTIFICADO COMO CAPACIDAD OPERATIVA.
+
+9. HABITANTE
+
+El Habitante no es simplemente un usuario registrado.
+
+Es una persona, empresa o actor que establece una relación progresiva con ODI.
+
+9.1 Capas de identidad
+VISITANTE
+HABITANTE ANÓNIMO
+HABITANTE IDENTIFICADO
+HABITANTE VERIFICADO
+OPERADOR
+CUSTODIO
+SUPERVISOR
+ARQUITECTO
+9.2 Modo Habitante
+
+Puede:
+
+preguntar;
+buscar;
+aprender;
+comprar;
+contratar;
+registrarse;
+inscribirse;
+compartir información;
+recibir acompañamiento;
+gestionar su actividad;
+conectar con actores del ecosistema.
+9.3 Modo Arquitecto
+
+Puede solicitar:
+
+estado del organismo;
+servicios;
+flujos;
+errores;
+bloqueos;
+tareas;
+repositorios;
+bases de datos;
+documentos;
+industrias;
+tiendas;
+despliegues;
+evidencias;
+decisiones pendientes.
+
+Debe poder expresar:
+
+“Investiga.”
+“Prepara.”
+“Simula.”
+“Compara.”
+“Propón.”
+“No ejecutes todavía.”
+“Ejecuta el plan aprobado.”
+“Revierte.”
+“Muéstrame evidencia.”
+9.4 Estado actual
+Capacidad	Estado
+Conversación Habitante	Live
+Retorno de visita	Live parcial
+OAuth progresivo	Código existente
+Memoria profunda	Parcial
+Modo Arquitecto visible	No construido
+Acciones operativas desde Hábitat	No construidas
+Permisos por capacidad	No construidos
+Evidencia postacción	No integrada
+10. FLUJOS
+10.1 Estado consolidado reportado
+TOTAL:       23
+LIVE:         5
+PARCIALES:    4
+DISEÑADOS:   14
+10.2 Flujos live
+saludo y presencia;
+conversación por texto;
+conversación por voz;
+retorno de sesión;
+modo HER de entrada.
+10.3 Flujos parciales
+productos en conversación;
+panel del ecosistema;
+skin por industria;
+fitment o consulta técnica.
+10.4 Flujos diseñados
+accesibilidad completa;
+archivos;
+puesto de mando;
+ejecución;
+proactividad;
+ODI Físico;
+screen control;
+nueva industria;
+escalamiento humano;
+anticipación.
+10.5 Flujo que debe gobernar todo
+
+Cada interacción necesita declarar su naturaleza:
+
+CONSULTA
+ANÁLISIS
+PROPUESTA
+SIMULACIÓN
+PREPARACIÓN
+MODIFICACIÓN
+EJECUCIÓN
+DESPLIEGUE
+REVERSIÓN
+
+No deben compartir el mismo contrato.
+
+11. HER — EXPERIENCIA VIVA
+11.1 Lo logrado
+ODI habla primero.
+La esfera genera presencia.
+Ramona introduce cuidado.
+Tony asume operación.
+La voz puede ser continua.
+Hay prevención de eco.
+Existe revisión de transcript para frases sensibles.
+Existen transiciones Ramona→Tony.
+La interfaz evita parecer un chatbot comercial convencional.
+11.2 Lo pendiente
+desaparición temporal de información sin perder recuperabilidad;
+ventanas espaciales no bloqueantes;
+continuidad entre dispositivos;
+memoria de relación;
+control de aplicaciones;
+movimiento de contexto entre voz y pantalla;
+proactividad gobernada;
+puesto de mando;
+acciones ejecutables.
+11.3 Regla HER para cards
+
+Una card debe:
+
+aparecer porque ODI la necesita;
+explicar por qué apareció;
+contener una acción principal;
+permanecer mientras sea útil;
+minimizarse cuando pierde prioridad;
+poder recuperarse;
+desaparecer cuando se cierra el contexto.
+
+No todo debe desaparecer por tiempo fijo. El tiempo depende de la naturaleza:
+
+Card	Permanencia
+Confirmación simple	Segundos
+Producto	Hasta decisión
+Archivo	Hasta cerrar análisis
+Plan	Hasta aprobar/rechazar
+Tarea activa	Hasta terminar
+Alerta	Hasta reconocer
+Evidencia	Persistente y recuperable
+12. CARDS INTELIGENTES FLOTANTES
+12.1 Base construida
+
+El frontend ya contempla ventanas efímeras para:
+
+productos;
+información;
+autenticación;
+cuidado.
+
+Esto prueba el patrón visual.
+
+12.2 Cards necesarias para el puesto de mando
+Organism Status Card
+
+Muestra:
+
+servicios;
+industrias;
+tiendas;
+tareas;
+alertas;
+frescura de datos;
+fronteras humanas.
+Plan Card
+
+Muestra:
+
+qué entendió ODI;
+objetivo;
+alcance;
+archivos afectados;
+riesgo;
+pruebas;
+rollback;
+autorización requerida.
+Execution Card
+
+Muestra:
+
+estado;
+pasos;
+logs resumidos;
+tiempo;
+bloqueos;
+botón detener;
+responsable.
+Evidence Card
+
+Muestra:
+
+commit;
+diff;
+tests;
+smoke;
+runtime;
+live/code-ready;
+rollback.
+File Card
+
+Muestra:
+
+preview;
+tipo;
+tamaño;
+extracción;
+entidades;
+sensibilidad;
+acciones disponibles.
+Comparison Card
+
+Muestra dos estados:
+
+repositorio vs runtime;
+antes vs después;
+fuente A vs fuente B;
+esperado vs observado.
+Application Card
+
+Puede mostrar o invocar:
+
+GitHub;
+Shopify;
+documentos;
+dashboards;
+calendario;
+correo;
+navegador;
+terminal autorizada;
+ODI Manager.
+Decision Card
+
+Solicita una decisión humana concreta:
+
+aprobar;
+rechazar;
+editar alcance;
+posponer;
+delegar.
+13. ARCHIVOS Y DATOS COMPARTIDOS
+Estado actual
+
+No existe todavía un circuito visible y certificado dentro del Hábitat para:
+
+subir archivos;
+previsualizarlos;
+extraer su contenido;
+relacionarlos con proyectos;
+generar tareas;
+mantener trazabilidad.
+Contrato necesario
+ADJUNTAR
+→ IDENTIFICAR
+→ CLASIFICAR SENSIBILIDAD
+→ EXTRAER
+→ PREVISUALIZAR
+→ CONFIRMAR INTERPRETACIÓN
+→ CONECTAR A PROYECTO
+→ PROPONER ACCIONES
+→ EJECUTAR SI SE AUTORIZA
+→ GUARDAR EVIDENCIA
+Tipos prioritarios
+PDF;
+DOCX;
+XLSX;
+CSV;
+imágenes;
+audio;
+video;
+ZIP;
+enlaces;
+JSON;
+logs;
+capturas.
+Reglas
+archivo compartido no significa autorización para modificar;
+extracción no significa verdad;
+OCR no significa interpretación correcta;
+datos sensibles deben etiquetarse;
+el habitante decide persistencia y alcance;
+toda acción derivada debe enlazar al archivo origen.
+14. EJECUCIÓN DESDE EL HÁBITAT
+Estado actual
+
+El frontend conversa, clasifica y registra telemetría, pero todavía declara que no creó tareas ni ejecutó acciones.
+
+Por lo tanto:
+
+CONVERSACIÓN:       SÍ
+COMPRENSIÓN:        PARCIAL
+PLAN OPERATIVO:     NO INTEGRADO
+TASK DISPATCH:      NO INTEGRADO
+EXECUTION ENGINE:   NO INTEGRADO
+EVIDENCE LOOP:      NO INTEGRADO
+Arquitectura propuesta
+Intent Router
+
+Clasifica la petición:
+
+consulta;
+lectura;
+análisis;
+propuesta;
+cambio;
+ejecución.
+Capability Registry
+
+Cada herramienta declara:
+
+nombre;
+capacidad;
+riesgo;
+actor autorizado;
+dry-run;
+evidencia;
+rollback;
+disponibilidad.
+Plan Compiler
+
+Convierte la intención en un plan legible.
+
+Policy/Governance Gate
+
+Decide:
+
+permitido;
+requiere confirmación;
+requiere firma;
+bloqueado;
+frontera humana.
+Execution Broker
+
+Invoca la herramienta correcta.
+
+Evidence Collector
+
+Recoge:
+
+resultado;
+cambios;
+pruebas;
+errores;
+estado vivo.
+Memory Writer
+
+Guarda únicamente lo que corresponde.
+
+15. PROACTIVIDAD Y ANTICIPACIÓN
+
+ODI debe poder:
+
+detectar desviaciones;
+advertir riesgos;
+comparar estados;
+proponer mejoras;
+preparar trabajo;
+recordar decisiones;
+anticipar vencimientos;
+sugerir conexiones.
+
+No debe ejecutar por iniciativa propia operaciones sensibles.
+
+Niveles
+Nivel	Acción
+P0	Observar
+P1	Informar
+P2	Recomendar
+P3	Preparar plan
+P4	Solicitar autorización
+P5	Ejecutar dentro de mandato previo
+
+La proactividad se gobierna por dominio, actor, riesgo y mandato.
+
+16. GUARDIAN Y BIENESTAR
+
+Guardian debe operar con prudencia.
+
+Puede:
+
+detectar señales de cansancio o frustración;
+reducir estímulos;
+simplificar;
+ofrecer una pausa;
+facilitar apoyo humano;
+registrar una alerta segura.
+
+No debe presentar inferencias como diagnósticos.
+
+Queda sellado:
+
+SEÑAL EMOCIONAL ≠ DIAGNÓSTICO
+RIESGO INFERIDO ≠ EMERGENCIA CONFIRMADA
+ACOMPAÑAMIENTO ≠ INTERVENCIÓN CLÍNICA
+
+Las actuaciones externas críticas requieren contratos humanos, legales y técnicos específicos.
+
+17. SKIN ENGINE
+Estado
+detección de industria: parcial;
+configuración de pieles: diseñada;
+cambio visual automático: no certificado en browser;
+contenido filtrado: parcial;
+identidad empresarial: parcial.
+Objetivo
+
+Un mismo Hábitat debe cambiar:
+
+color;
+tono;
+catálogo;
+cards;
+voz;
+lenguaje;
+acciones disponibles.
+
+No debe cambiar:
+
+identidad ODI;
+accesibilidad;
+gobierno;
+seguridad;
+estructura de interacción;
+memoria;
+evidencia.
+18. SERVICIOS Y CONEXIONES
+
+El Hábitat debe poder consumir de forma unificada:
+
+Chat API;
+Voice;
+WebSocket;
+Guardian;
+CES;
+Orígenes;
+Pipeline;
+SRM;
+P10;
+T10;
+PostgreSQL;
+ChromaDB;
+GitHub;
+Shopify;
+Desktop Bridge;
+Screen Stream;
+ODI Manager.
+
+Cada conexión debe informar:
+
+LIVE
+DEGRADED
+UNAVAILABLE
+NOT_CONNECTED
+CODE_READY
+HUMAN_FRONTIER
+
+No se deben ocultar fallos bajo una respuesta conversacional genérica.
+
+19. BRECHAS CRÍTICAS
+Prioridad 0 — Contrato del Hábitat
+
+Falta definir formalmente:
+
+estados;
+modos;
+cards;
+permisos;
+capacidades;
+transiciones;
+evidencias.
+Prioridad 1 — Identidad y roles
+
+Falta unificar:
+
+OAuth;
+habitante;
+arquitecto;
+custodio;
+permisos;
+firma.
+Prioridad 2 — Session State
+
+Falta memoria operativa consistente para:
+
+tono;
+preferencias;
+accesibilidad;
+proyectos;
+tareas;
+decisiones.
+Prioridad 3 — Puesto de mando
+
+Falta conectar datos vivos con experiencia HER.
+
+Prioridad 4 — Ejecución gobernada
+
+Falta integrar conversación→plan→gate→task→evidencia.
+
+Prioridad 5 — Archivos
+
+Falta ingesta multimodal desde el Hábitat.
+
+Prioridad 6 — Accesibilidad real
+
+Faltan cerrar J1 y J4 y validar señas como canal real.
+
+Prioridad 7 — ODI Físico
+
+Falta distribución, permisos y certificación del bridge.
+
+20. RIESGOS
+Riesgo 1 — Convertir HER en dashboard
+
+Solución: superficies temporales y recuperables, no panel permanente.
+
+Riesgo 2 — Ejecutar órdenes ambiguas
+
+Solución: interpretación visible, revisión y firma por riesgo.
+
+Riesgo 3 — Mezclar conversación con autorización
+
+Solución:
+
+DECIR “SÍ” ≠ FIRMA
+CONFIRMAR TRANSCRIPT ≠ AUTORIZAR EJECUCIÓN
+IDENTIDAD ≠ PERMISO
+Riesgo 4 — Privacidad del Desktop Bridge
+
+Solución: permisos por capacidad y sesión.
+
+Riesgo 5 — Inflar estados
+
+Solución: distinguir LIVE, CODE_READY, DISEÑADO y NO CONSTRUIDO.
+
+Riesgo 6 — Perder la simplicidad visual
+
+Solución: mantener la esfera como hogar y hacer que las superficies nazcan solo bajo contexto.
+
+21. ARQUITECTURA OBJETIVO
+                    ┌───────────────────────┐
+                    │     HABITANTE         │
+                    │ voz · texto · señas   │
+                    │ archivos · pantalla   │
+                    └───────────┬───────────┘
+                                │
+                    ┌───────────▼───────────┐
+                    │    HÁBITAT LIVEODI    │
+                    │ presencia · cards     │
+                    │ conversación · mando  │
+                    └───────────┬───────────┘
+                                │
+              ┌─────────────────▼─────────────────┐
+              │      HUMAN INTERACTION CORE       │
+              │ identidad · tono · accesibilidad │
+              │ memoria · industria · intención  │
+              └─────────────────┬─────────────────┘
+                                │
+              ┌─────────────────▼─────────────────┐
+              │       GOVERNED ACTION CORE        │
+              │ plan · riesgo · firma · políticas │
+              │ capabilities · task dispatcher    │
+              └─────────────────┬─────────────────┘
+                                │
+       ┌────────────────────────▼────────────────────────┐
+       │ GitHub · PG · Chroma · SRM · P10 · T10         │
+       │ Shopify · Manager · Browser · Desktop Bridge   │
+       │ Screen Stream · Files · Apps · Devices         │
+       └────────────────────────┬────────────────────────┘
+                                │
+              ┌─────────────────▼─────────────────┐
+              │          EVIDENCE CORE            │
+              │ diff · tests · runtime · rollback │
+              │ memoria · auditoría · SONAR       │
+              └───────────────────────────────────┘
+22. PROGRAMA DE CONSTRUCCIÓN RECOMENDADO
+Tanda 1 — Contrato del Hábitat
+estados;
+modos;
+cards;
+capacidades;
+permisos;
+eventos;
+evidencia.
+Tanda 2 — Puesto de mando read-only
+
+Primero lectura, sin ejecución:
+
+organismo;
+servicios;
+tareas;
+industrias;
+repositorios;
+fronteras.
+Tanda 3 — Archivos y datos
+subida;
+preview;
+extracción;
+análisis;
+conexión a proyectos.
+Tanda 4 — Planes y autorizaciones
+Plan Card;
+Risk Card;
+Decision Card;
+firmas;
+dry-run.
+Tanda 5 — Ejecución de bajo riesgo
+consultas;
+generación de documentos;
+creación de drafts;
+tareas reversibles.
+Tanda 6 — Accesibilidad operativa
+J1;
+J4;
+session state;
+lectura completa;
+modo cognitivo.
+Tanda 7 — ODI Físico
+instaladores;
+permisos;
+screen stream;
+control local limitado.
+Tanda 8 — Proactividad
+observación;
+recomendaciones;
+planes anticipados;
+alertas.
+Tanda 9 — Experiencia metabólica
+skin;
+transiciones;
+sonido;
+continuidad multidispositivo.
+23. CRITERIOS DE CIERRE DEL ASISTENTE IDEAL
+
+El Hábitat estará realmente operativo cuando el Arquitecto pueda decir:
+
+“ODI, muéstrame el estado completo del ecosistema.”
+
+Y ODI:
+
+consulte datos vivos;
+abra cards relevantes;
+distinga hechos de hipótesis;
+muestre bloqueos;
+proponga prioridades;
+permita abrir la evidencia.
+
+Luego:
+
+“Prepara la corrección del bloqueo principal. No ejecutes.”
+
+Y ODI:
+
+genere un plan;
+muestre alcance;
+identifique riesgo;
+prepare rollback;
+espere autorización.
+
+Luego:
+
+“Ejecuta el plan aprobado.”
+
+Y ODI:
+
+valide identidad y firma;
+ejecute mediante herramienta autorizada;
+muestre progreso;
+detenga ante desviación;
+pruebe;
+recoja evidencia;
+informe code_ready o live;
+conserve memoria verificable.
+24. VEREDICTO FINAL
+PRESENCIA ODI:                 LIVE
+CONVERSACIÓN VOZ/TEXTO:        LIVE PARCIAL
+TONY + RAMONA:                 LIVE
+REVISIÓN DE TRANSCRIPCIÓN:     CODE/LIVE SEGÚN RUTA
+CARDS EFÍMERAS BÁSICAS:        CONSTRUIDAS
+PUESTO DE MANDO HER:           POR CONSTRUIR
+ARCHIVOS COMPARTIDOS:          POR CONSTRUIR
+EJECUCIÓN DESDE HÁBITAT:       NO INTEGRADA
+EQUIPO A:                      DISEÑO FUERTE · 2/4 JOURNEYS
+EQUIPO B:                      POC FÍSICO · SIN DISTRIBUCIÓN
+SCREEN STREAM:                 SERVICIO PARCIAL · NO CERTIFICADO
+SESSION STATE:                 DEUDA CRÍTICA
+AUTH ROLES:                    DEUDA CRÍTICA
+PROACTIVIDAD:                  DISEÑADA · NO ACTIVADA
+EXPERIENCIA HER:               PRESENCIA NACIDA
+
+La conclusión arquitectónica es:
+
+No hay que reemplazar el Hábitat que ya existe. Hay que permitir que se expanda, bajo conversación y contexto, hasta convertirse en el puesto de mando del organismo.
+
+La esfera sigue siendo el hogar.
+
+Las cards serán sus manos.
+
+La voz será la relación.
+
+El núcleo gobernado será su capacidad de actuar.
+
+La evidencia será la memoria de lo que realmente hizo.
+
+Somos Industrias ODI.

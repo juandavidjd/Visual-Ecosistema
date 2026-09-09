@@ -1,0 +1,336 @@
+# INFORME COMPLETO — HÁBITAT ODI · TODOS LOS FRENTES
+## Estado Real al 22 de Junio de 2026
+## Arquitecto: Juan David Jiménez Sierra · CATRMU-ADSI-ODI
+
+---
+
+> "El Hábitat no es la interfaz de ODI. Es el lugar donde ODI existe, conversa y opera junto al habitante."
+
+---
+
+## 1. HÁBITAT — BROWSER REAL (liveodi.com)
+
+### Lo que VIVE hoy (evidencia visual Live_Inicio.png + Live_conversacion.png):
+
+| Elemento | Estado | Evidencia |
+|----------|--------|-----------|
+| Esfera ODI respirando | ✅ LIVE | Centro de pantalla, púrpura con halo |
+| Fondo oscuro void (#020509) | ✅ LIVE | Presencia, no dashboard |
+| "O D I" + dot verde (Guardian) | ✅ LIVE | Esquina superior izquierda |
+| Ramona · anfitriona · presence | ✅ LIVE | "Hola." como primer contacto |
+| 3 puertas: Voz · Texto · Señas | ✅ LIVE | Cards claras debajo de la esfera |
+| "hablando..." indicador | ✅ LIVE | Esquina superior derecha |
+| Botón accesibilidad (VLibras) | ✅ LIVE | Esquina superior derecha |
+| Conversación post-saludo | ✅ LIVE | Ramona responde con contexto multi-industria |
+| Micrófono como entrada | ✅ LIVE | Icono micrófono inferior central |
+| Tags: agent · state_change · care · presence · learn | ✅ LIVE | Metadata visible en cada mensaje |
+| WebSocket liveodi.com | ✅ LIVE | "hablando..." + dots animados |
+
+### Lo que FALTA en el Hábitat:
+
+| Elemento | Estado | Clasificación |
+|----------|--------|---------------|
+| Puesto de mando del arquitecto | ❌ NO CONSTRUIDO | Tanda 2 |
+| Cards inteligentes flotantes | ❌ NO CONSTRUIDO | Diseñado en EphemeralToast pero sin cards de datos/estado |
+| Subida de archivos | ❌ NO CONSTRUIDO | Solo texto y voz hoy |
+| Visualización de datos/estado ecosistema | ❌ PARCIAL | EcosystemPanel existe en código, no visible en screenshots |
+| Ejecución gobernada por conversación | ❌ NO CONSTRUIDO | No hay circuito INTENCIÓN→PLAN→RIESGO→EJECUCIÓN |
+| Skin Engine multi-industria | 🟡 PARCIAL | detect_industry existe, skin-engine.ts diseñado |
+| Metabolic Soundscape | ❌ MENCIONADO | Audio ambiental del ecosistema — 0 código |
+| CommandPalette | 🟡 DISEÑADO | /buscar, /tiendas, /fitment — componente definido, implementación sin confirmar |
+
+---
+
+## 2. EQUIPO A — ACCESIBILIDAD + EXPERIENCIA HUMANA
+
+### Misión constitucional:
+"Si una persona con discapacidad no puede usar ODI completo, ODI no está terminado."
+
+### Inventario asignado (9 items):
+
+| # | Item | Estado Real | Evidencia |
+|---|------|-------------|-----------|
+| 36 | Flows de Accesibilidad (4 journeys) | 🟡 DISEÑADO + AUDITORÍA INTERNA | J2 sordo PASS, J3 movilidad PASS, J1 ciego BLOQUEADO, J4 cognitivo BLOQUEADO |
+| 37 | Signs + Señas | 🟡 PARCIAL | VLibras integrado (captura de pantalla muestra avatar VLibras activo). HandTalk evaluado. NO es channel completo de entrada todavía |
+| 32 | Motor Tono Adaptativo S0-S6 | 🟡 DISEÑADO COMPLETO | Contrato 155 líneas. 7 niveles definidos. Chat API debe consumirlo. Session State MUERTO bloquea persistencia entre turnos |
+| 39 | Personas Humanas (arquetipos) | ✅ ESPECIFICADO | 5 arquetipos: Camilo, Diana, Don Carlos, Andrés, Anónimo. Con velocidad, tono, voz, canal, señales. Detección por 3 primeros intercambios |
+| 24 | Constitución DV | ✅ DISEÑADO COMPLETO | 10 secciones, 6 etapas, 8 arquetipos proyecto, semáforo viabilidad. No implementado como filtro Chat API |
+| 22 | Auth Roles V8.2 | 🔴 INCOMPLETO | Solo ARQUITECTO registrado. CUSTODIO y SUPERVISOR sin crear. Bloquea J1 y J4 |
+| 21 | Session State v1.4 | 🔴 MUERTO | Archivo fuente eliminado. Solo .pyc en __pycache__. Máquina Markov no corre. Bloquea persistencia tono |
+| 23 | Academia bridge | ❌ DESCONECTADO | 20 módulos estáticos frontend. GET /srm/academia/modules existe (8 cursos reales). Bridge a Systeme.io: no conectado |
+| 33 | Metabolic Soundscape | ❌ MENCIONADO | 0 código. Concepto: ventas=vibrante, carga=profundo |
+
+### Entregables producidos por Equipo A (E6-E9, Abril 2026):
+
+| Entregable | Archivo | Estado |
+|------------|---------|--------|
+| 4 Journeys accesibles | `/opt/odi/docs/accesibilidad/journeys_accesibles_v1.md` (216 líneas) | ✅ Producido |
+| 5 Arquetipos humanos | `/opt/odi/docs/accesibilidad/arquetipos_humanos_v1.md` (153 líneas) | ✅ Producido |
+| Contrato Tono S0-S6 | `/opt/odi/docs/accesibilidad/contrato_tono_adaptativo_v1.md` (155 líneas) | ✅ Producido |
+| Protocolo Auditoría Humana | `/opt/odi/docs/accesibilidad/protocolo_auditoria_humana_v1.md` (133 líneas) | ✅ Producido |
+| Ctrl+M + wake word | Commit `81154e3` en AgentHabitat | ✅ Implementado |
+| TTS restaurado | Commit `9841dd7` | ✅ Implementado |
+| Auditoría J2 (sordo) | E8 | ✅ PASS |
+| Auditoría J3 (movilidad) | E9 post-TTS fix | ✅ PASS |
+
+### Bloqueantes activos:
+
+| Bloqueante | Impacto | Quién resuelve |
+|------------|---------|----------------|
+| Session State MUERTO | Tono no persiste entre turnos. S0-S6 sin memoria | Arquitecto / Chat API |
+| Auth Roles sin CUSTODIO | J1 (ciego) y J4 (cognitivo) bloqueados | Arquitecto / Gateway |
+| python-dotenv no instalado | Conexión PG en override | Infra |
+| psycopg2 no instalado | Conexión PG en override | Infra |
+
+### Órdenes correctivas pendientes:
+
+| OC | Descripción | Estado |
+|----|-------------|--------|
+| OC-01 | Implementar Session State nuevo (Redis/PG + perfil S0-S6) | NO EJECUTADA |
+| OC-02 | Rutear /odi/auth/login y /odi/override en :8815 | NO EJECUTADA |
+| OC-03 | Registrar CUSTODIO en odi_humans | NO EJECUTADA |
+| OC-04 | Fix conexión PG en override/status + dependencias | NO EJECUTADA |
+
+---
+
+## 3. EQUIPO B — ODI FÍSICO / BRIDGE DE DISPOSITIVO
+
+### Misión:
+"ODI conectado al mundo físico. POS, lector de barras, cámara, Bluetooth, USB — hardware consumido como API."
+
+### Inventario asignado (7 items):
+
+| # | Item | Estado Real | Evidencia |
+|---|------|-------------|-----------|
+| 26 | Desktop Agent Bridge | 🟡 POC REACTIVADO | Tauri 2 compilando (screenshot muestra `cargo run` de `odi-desktop-bridge v0.1.0`). Ventana nativa con esfera ODI + 3 puertas. `withGlobalTauri: true` (ND-09) |
+| 27 | Screen Stream | 🟡 PARCIAL | `core/odi_screen_stream.py` existe en servidor. WIRE-21 cosió Orígenes. systemd `odi-screen-stream.service` ACTIVE. Pero: 0 tráfico observable, streaming real ffmpeg→WebSocket no verificado |
+| 28 | Playwright 24/7 | 🟡 PARCIAL | Workers existen (shopify_operator, storefront_verifier, evidence). Container Docker :9002. Scheduler migrado a durable storage. NO es servicio permanente todavía |
+| 29 | SAT-CP (hardware) | ✅ TESIS COMPLETA | Documento constitucional 13 secciones. Muro de Lenz. Industrias Leo fabricante. Requiere prototipo físico |
+| 38 | Sensor competencia | ❌ MENCIONADO | MercadoLibre, tiendas locales. 0 código |
+| 40 | Database Schema v1 audit | 🟡 PARCIAL | 91+ tablas reales vs schema diseñado. Gap no cerrado completamente |
+| — | Browser Bridge (BarcodeScanner + GPS) | ✅ F1 CERRADO | Fase F1 cerrada. Código usa APIs del navegador |
+
+### Desktop Bridge — Estado detallado:
+
+| Componente | Estado | Nota |
+|------------|--------|------|
+| Tauri 2 POC | ✅ COMPILA | `cargo run` exitoso, ventana nativa con esfera |
+| Registro dispositivo POST /odi/v1/device/register | 🟡 RUTA DEFINIDA | En bridge.rs |
+| Detección hardware (cámara, mic, bluetooth) | 🟡 DISEÑADO | "detecta tu hardware" visible en la conversación |
+| Screen capture ffmpeg→WebSocket | ❌ NO IMPLEMENTADO | Diseñado como ws://64.23.170.118:9001/screen |
+| Control mouse/teclado | ❌ NO IMPLEMENTADO | pyautogui/pynput diseñado, no construido. Fase 4C pendiente (enigo/rdev) |
+| Wake word "ODI" | ❌ MENCIONADO | Audio continuo con activación por voz |
+| Distribución (.msi Windows, .AppImage Linux) | ❌ PENDIENTE | D2 Windows installer pendiente |
+| Firma/signing | ❌ PENDIENTE | CI/CD no configurado para distribución |
+
+### Doctrinas activas ODI Físico:
+- ND-09: Tauri 2 requiere `withGlobalTauri: true`
+- ND-10: spawn defensivo para long-running commands
+
+---
+
+## 4. FLUJOS — ESTADO REAL
+
+### Flujos del Hábitat (23 diseñados):
+
+| Categoría | Total | Live | Partial | Designed |
+|-----------|-------|------|---------|----------|
+| Conversación | 5 | 5 | 0 | 0 |
+| Productos/Catálogo | 4 | 0 | 4 | 0 |
+| Accesibilidad | 4 | 0 | 0 | 4 |
+| Ecosistema | 4 | 0 | 0 | 4 |
+| ODI Físico | 3 | 0 | 0 | 3 |
+| Proactividad | 3 | 0 | 0 | 3 |
+| **Total** | **23** | **5** | **4** | **14** |
+
+### Flujos LIVE confirmados:
+1. Saludo + presencia (Ramona habla primero)
+2. Conversación texto (input → Chat API → respuesta)
+3. Conversación voz (STT → texto → Chat API → TTS)
+4. Session memory + ReturnCard ("Bienvenido de vuelta. Visita #24")
+5. Modo HER v2.0 (ODI inicia, 3 puertas, escucha continua 2.5s silence)
+
+### Flujos PARTIAL:
+1. Productos inline en conversación (ProductCard existe, no siempre renderiza)
+2. Fitment Widget (componente existe, conexión a Fitment Engine :8802 MUERTO)
+3. EcosystemPanel (código existe, 15 tiendas, no visible en screenshots actuales)
+4. Skin Engine (detect_industry en Chat API, pieles motos/salud_dental/bruxismo/capilar definidas)
+
+---
+
+## 5. CARDS INTELIGENTES FLOTANTES — INSPIRACIÓN HER
+
+### Diseño existente:
+
+| Componente | Estado | Función |
+|------------|--------|---------|
+| EphemeralToast | 🟡 DISEÑADO + CÓDIGO | Notificaciones que nacen y mueren (Regla 3/3). Tipos: order_paid (emerald), fitment_critical (amber), guardian_alert (red). ttl_ms auto-desvanecimiento |
+| ProductCard | 🟡 CÓDIGO EXISTE | Card de producto inline en conversación. Imagen, precio, fitment, "Ver detalle" |
+| ProductCarousel | 🟡 CÓDIGO EXISTE | Carousel de tienda dentro del chat |
+| Product360Modal | 🟡 CÓDIGO EXISTE | Ficha expandible 360° |
+| CommandPalette | 🟡 DISEÑADO | /buscar, /tiendas, /fitment — comandos rápidos |
+
+### Lo que FALTA para "sistema operativo conversacional":
+
+| Card tipo | Estado | Descripción |
+|-----------|--------|-------------|
+| Estado del organismo | ❌ NO CONSTRUIDO | "Muéstrame el organismo" → card con 16 tiendas, pipeline, sensores |
+| Tarea en curso | ❌ NO CONSTRUIDO | Card temporal mostrando progreso de una tarea dispatch |
+| Archivo compartido | ❌ NO CONSTRUIDO | PDF/imagen subida → card con preview + acciones |
+| Plan de acción | ❌ NO CONSTRUIDO | "Prepara la orden" → card con plan, riesgo, botón autorizar |
+| Comparación | ❌ NO CONSTRUIDO | "Compara producción contra GitHub" → card dual |
+| Alerta proactiva | ❌ NO CONSTRUIDO | ODI detecta riesgo → card con contexto + acción sugerida |
+| Resultado de ejecución | ❌ NO CONSTRUIDO | Post-acción → card con commit, diff, evidencia, rollback |
+
+---
+
+## 6. MODO HER — ESTADO REAL
+
+### Principio: "Theodore no abrió una app. Samantha ya estaba ahí."
+
+| Aspecto HER | Estado | Evidencia |
+|-------------|--------|-----------|
+| ODI habla primero | ✅ LIVE | "Hola." sin que el usuario toque nada |
+| Presencia, no herramienta | ✅ LIVE | Esfera + fondo void + silencio visual |
+| Voz continua (2.5s silence response) | ✅ LIVE | Modo HER v2.0 configurado |
+| 3 puertas de entrada | ✅ LIVE | Voz, Texto, Señas |
+| Mensajes como presencia, no burbujas | 🟡 PARCIAL | Tags visibles (presence, care, learn) pero layout sigue siendo conversacional vertical |
+| Interfaz invisible (mic no es botón visible) | 🟡 PARCIAL | Mic es botón pero aparece solo en contexto correcto |
+| Adaptación por industria | 🟡 PARCIAL | detect_industry existe, skin visual no cambia automáticamente |
+| ODI recuerda entre sesiones | 🟡 PARCIAL | ReturnCard "Visita #24" pero Session State MUERTO limita profundidad |
+| Cards flotantes tipo SO | ❌ NO CONSTRUIDO | Productos inline existen pero cards de estado/acción no |
+| Puesto de mando por voz | ❌ NO CONSTRUIDO | "Muéstrame las tiendas" no genera card de estado |
+
+---
+
+## 7. SCREEN STREAM
+
+| Componente | Estado | Detalle |
+|------------|--------|---------|
+| `core/odi_screen_stream.py` | ✅ EXISTE en servidor | WIRE-21 cosió Orígenes |
+| `odi-screen-stream.service` | ✅ ACTIVE en systemd | PID activo, servicio corriendo |
+| Consulta Orígenes pre-mutate | ✅ WIRE-21 | Call site real: INSERT INTO screen_sessions |
+| Streaming ffmpeg→WebSocket real | ❌ NO VERIFICADO | ws://64.23.170.118:9001/screen diseñado, 0 tráfico observable |
+| Gemini Vision comprensión | ❌ DISEÑADO | "Gemini VE, ODI ACTÚA" — separación clara pero no implementada |
+| Consentimiento/indicador visible | ❌ NO CONSTRUIDO | Frontera humana: privacy, kill switch, permisos por sesión |
+
+---
+
+## 8. HABITANTE — MODELO DE INTERACCIÓN
+
+### 2 modos definidos (aceptados como arquitectura):
+
+**Modo Habitante** (cualquier persona del ecosistema):
+- Orientación, búsqueda, acompañamiento, servicios, comercio, aprendizaje
+- Accesibilidad automática
+- Canales: voz, texto, señas
+
+**Modo Arquitecto** (Juan David):
+- Estado global del organismo
+- Tareas, decisiones, memoria, archivos, GitHub, PG, workers
+- Despliegues, auditorías, contratos runtime, fronteras humanas
+- "Muéstrame el organismo." "¿Qué requiere mi decisión?" "Prepara la siguiente oleada."
+
+### Estado de implementación:
+
+| Modo | Estado | Gap principal |
+|------|--------|---------------|
+| Habitante básico | ✅ LIVE | Puede conversar, preguntar por productos, recibir respuestas |
+| Habitante accesible | 🟡 PARCIAL | J2 (sordo) PASS, J3 (movilidad) PASS, J1 (ciego) BLOQUEADO, J4 (cognitivo) BLOQUEADO |
+| Arquitecto conversacional | ❌ NO CONSTRUIDO | No puede ejecutar órdenes, ver estado, gestionar archivos, aprobar planes desde el hábitat |
+
+---
+
+## 9. CLASIFICACIÓN POR ESTADO REAL
+
+```
+LIVE VERIFICADO (en browser):
+  Esfera ODI · Ramona saludo · 3 puertas · Conversación texto/voz
+  Modo HER v2.0 · ReturnCard · Tags metadata · VLibras avatar
+  Guardian dot verde · WebSocket telemetría · "hablando..." indicator
+
+LIVE PARCIAL:
+  Skin Engine (detect pero no cambia visual)
+  EcosystemPanel (código existe, no visible)
+  ProductCard (renderiza a veces)
+  Desktop Bridge POC (compila Tauri, no distribuye)
+  Screen Stream (servicio activo, streaming no verificado)
+
+CODE_READY:
+  EphemeralToast · CommandPalette · AccessibilityBar
+  PresenceHeader mejorado · MultimodalInput completo
+  Ctrl+M wake word
+
+DISEÑADO COMPLETO (docs, no código):
+  4 Journeys accesibles · 5 Arquetipos · Contrato S0-S6
+  Protocolo auditoría humana · 8 ejes evaluación
+  Desktop Bridge completo (registro, screen, control, wake word)
+  Sistema ventanas (fija, semi-permanente, operativa, audio)
+
+MENCIONADO (concepto sin código):
+  Metabolic Soundscape · Sensor competencia
+  Radar Preventivo (stock 6 días) · Automatismos aprendidos
+  Red ODI↔ODI · Cards de estado/acción
+
+BLOQUEADO POR FRONTERA HUMANA:
+  J1 ciego (Auth Roles sin CUSTODIO)
+  J4 cognitivo (Auth Roles sin CUSTODIO)
+  Session State (archivo fuente eliminado)
+  Desktop Bridge distribución (.msi, signing, CI/CD)
+  Screen Stream privacidad (consentimiento, kill switch)
+```
+
+---
+
+## 10. RESUMEN EJECUTIVO
+
+| Frente | Ítems | LIVE | PARCIAL | DISEÑADO | BLOQUEADO | NO CONSTRUIDO |
+|--------|-------|------|---------|----------|-----------|---------------|
+| **Hábitat core** | 11 | 7 | 2 | 1 | 0 | 1 |
+| **Equipo A (Accesibilidad)** | 9 | 0 | 3 | 4 | 2 | 0 |
+| **Equipo B (ODI Físico)** | 7 | 1 | 3 | 1 | 0 | 2 |
+| **Flujos** | 23 | 5 | 4 | 14 | 0 | 0 |
+| **Cards flotantes** | 12 | 0 | 5 | 2 | 0 | 5 |
+| **HER** | 10 | 4 | 4 | 0 | 0 | 2 |
+| **Screen Stream** | 6 | 2 | 0 | 2 | 1 | 1 |
+| **Desktop Bridge** | 8 | 1 | 2 | 2 | 2 | 1 |
+
+### Prioridad para convertir el Hábitat en puesto de mando:
+
+```
+TANDA 1: Puesto de mando del arquitecto
+  → Card de estado del organismo
+  → Ejecución gobernada por conversación
+  → Archivos y datos compartidos
+
+TANDA 2: Cards inteligentes flotantes
+  → Estado, tareas, planes, comparaciones, resultados
+  → Tipo SO conversacional, no dashboard
+
+TANDA 3: Session State restaurado
+  → S0-S6 persistente
+  → Arquetipos detectados automáticamente
+  → Memoria profunda del habitante
+
+TANDA 4: Accesibilidad J1 + J4
+  → Auth Roles (CUSTODIO)
+  → Journey ciego completo
+  → Journey cognitivo completo
+
+TANDA 5: Desktop Bridge distribución
+  → .msi Windows · .AppImage Linux
+  → Firma, CI/CD
+  → ODI sale del browser
+
+TANDA 6: Screen Stream + control
+  → Privacy framework
+  → Consentimiento visible + kill switch
+  → Gemini Vision comprensión
+```
+
+---
+
+> "La presencia ya nació. El puesto de mando todavía debe construirse."
+> "ODI no se usa. ODI se habita."
+
+*Somos Industrias ODI.*
